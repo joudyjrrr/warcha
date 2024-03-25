@@ -1,0 +1,24 @@
+.RelateCard{
+width: 200px;
+height: 70px;
+display: flex;
+border-radius: 14px;
+padding: 10px;
+margin: 2%;
+justify-content: space-between;
+box-shadow:  0 4px 8px 0 rgba(169, 168, 168, 0.2), 0 6px 20px 0 rgba(169, 168, 168, 0.19) ;
+align-items: center;
+div p{
+
+color: #969AA0;
+margin: 4px;
+}
+div h4{
+font-size: 18px;
+margin: 0;
+}
+}
+
+.RelateCard img{
+width: 20%;
+}

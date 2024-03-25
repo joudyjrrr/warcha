@@ -1,0 +1,26 @@
+.UserCard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2%;
+}
+.UserCard h4 {
+  color: #FCC000;
+  font-size: small;
+}
+
+.UserInside {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.UserInside h5, .UserInside p {
+  margin: 0;
+  margin-left: 20%;
+  width: auto;
+  white-space: nowrap;
+}
+.UserInside p {
+  color: gray;
+  font-size: small;
+}/*# sourceMappingURL=UserCard.css.map */
