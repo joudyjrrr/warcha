@@ -1,0 +1,19 @@
+.rdt_Table {
+  overflow-x: auto;
+  .rdt_TableHead {
+    .rdt_TableHeadRow {
+      background: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 14.51px;
+      color: var(--heading-color);
+    }
+  }
+  .rdt_TableBody {
+    background: inherit;
+    .rdt_TableRow {
+      color: var(--body-color);
+      background: inherit;
+    }
+  }
+}

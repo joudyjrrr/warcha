@@ -1,0 +1,103 @@
+:root {
+  //? typography
+  --heading-color: color-mix(in srgb, #4b465c, white 10%);
+  --body-color: color-mix(in srgb, #4b465c, white 20%);
+  --muted-color: color-mix(in srgb, #4b465c, white 50%);
+  --placeholder-color: color-mix(in srgb, #4b465c, white 60%);
+
+  //? background
+  --background-color: #f8f7fa;
+
+  //? colors
+
+  // primary
+  --primary-color-100: color-mix(in srgb, #7367f0, white 80%);
+  --primary-color-200: color-mix(in srgb, #7367f0, white 60%);
+  --primary-color-300: color-mix(in srgb, #7367f0, white 40%);
+  --primary-color-400: color-mix(in srgb, #7367f0, white 20%);
+  --primary-color-500: 115 103 240;
+  --primary-color-600: color-mix(in srgb, #7367f0, black 10%);
+  --primary-color-700: color-mix(in srgb, #7367f0, black 15%);
+  --primary-color-800: color-mix(in srgb, #7367f0, black 20%);
+  --primary-color-900: color-mix(in srgb, #7367f0, black 25%);
+
+  // secondary
+  --secondary-color-100: color-mix(in srgb, #a8aaae, white 80%);
+  --secondary-color-200: color-mix(in srgb, #a8aaae, white 60%);
+  --secondary-color-300: color-mix(in srgb, #a8aaae, white 40%);
+  --secondary-color-400: color-mix(in srgb, #a8aaae, white 20%);
+  --secondary-color-500: 168 170 174;
+  --secondary-color-600: color-mix(in srgb, #a8aaae, black 10%);
+  --secondary-color-700: color-mix(in srgb, #a8aaae, black 15%);
+  --secondary-color-800: color-mix(in srgb, #a8aaae, black 20%);
+  --secondary-color-900: color-mix(in srgb, #a8aaae, black 25%);
+
+  // gray
+  --gray-color-100: color-mix(in srgb, #4b465c, white 95%);
+  --gray-color-200: color-mix(in srgb, #4b465c, white 80%);
+  --gray-color-300: color-mix(in srgb, #4b465c, white 70%);
+  --gray-color-400: color-mix(in srgb, #4b465c, white 60%);
+  --gray-color-500: 75 70 92;
+  --gray-color-600: color-mix(in srgb, #4b465c, black 40%);
+  --gray-color-700: color-mix(in srgb, #4b465c, black 30%);
+  --gray-color-800: color-mix(in srgb, #4b465c, black 20%);
+  --gray-color-900: color-mix(in srgb, #4b465c, black 10%);
+
+  // warning
+  --warning-color-100: color-mix(in srgb, #ff9f43, white 80%);
+  --warning-color-200: color-mix(in srgb, #ff9f43, white 60%);
+  --warning-color-300: color-mix(in srgb, #ff9f43, white 40%);
+  --warning-color-400: color-mix(in srgb, #ff9f43, white 20%);
+  --warning-color-500: 255 159 67;
+  --warning-color-600: color-mix(in srgb, #ff9f43, black 10%);
+  --warning-color-700: color-mix(in srgb, #ff9f43, black 15%);
+  --warning-color-800: color-mix(in srgb, #ff9f43, black 20%);
+  --warning-color-900: color-mix(in srgb, #ff9f43, black 25%);
+
+  // info
+  --info-color-100: color-mix(in srgb, #00cfe8, white 80%);
+  --info-color-200: color-mix(in srgb, #00cfe8, white 60%);
+  --info-color-300: color-mix(in srgb, #00cfe8, white 40%);
+  --info-color-400: color-mix(in srgb, #00cfe8, white 20%);
+  --info-color-500: 0 207 232;
+  --info-color-600: color-mix(in srgb, #00cfe8, black 10%);
+  --info-color-700: color-mix(in srgb, #00cfe8, black 15%);
+  --info-color-800: color-mix(in srgb, #00cfe8, black 20%);
+  --info-color-900: color-mix(in srgb, #00cfe8, black 25%);
+
+  // success
+  --success-color-100: color-mix(in srgb, #28c76f, white 80%);
+  --success-color-200: color-mix(in srgb, #28c76f, white 60%);
+  --success-color-300: color-mix(in srgb, #28c76f, white 40%);
+  --success-color-400: color-mix(in srgb, #28c76f, white 20%);
+  --success-color-500: 40 199 111;
+  --success-color-600: color-mix(in srgb, #28c76f, black 10%);
+  --success-color-700: color-mix(in srgb, #28c76f, black 15%);
+  --success-color-800: color-mix(in srgb, #28c76f, black 20%);
+  --success-color-900: color-mix(in srgb, #28c76f, black 25%);
+
+  // danger
+  --danger-color-100: color-mix(in srgb, #ea5455, white 80%);
+  --danger-color-200: color-mix(in srgb, #ea5455, white 60%);
+  --danger-color-300: color-mix(in srgb, #ea5455, white 40%);
+  --danger-color-400: color-mix(in srgb, #ea5455, white 20%);
+  --danger-color-500: 234 84 85;
+  --danger-color-600: color-mix(in srgb, #ea5455, black 10%);
+  --danger-color-700: color-mix(in srgb, #ea5455, black 15%);
+  --danger-color-800: color-mix(in srgb, #ea5455, black 20%);
+  --danger-color-900: color-mix(in srgb, #ea5455, black 25%);
+
+  // dark
+  --dark-color-100: color-mix(in srgb, #4b4b4b, white 80%);
+  --dark-color-200: color-mix(in srgb, #4b4b4b, white 60%);
+  --dark-color-300: color-mix(in srgb, #4b4b4b, white 40%);
+  --dark-color-400: color-mix(in srgb, #4b4b4b, white 20%);
+  --dark-color-500: 75 75 75;
+  --dark-color-600: color-mix(in srgb, #4b4b4b, black 10%);
+  --dark-color-700: color-mix(in srgb, #4b4b4b, black 15%);
+  --dark-color-800: color-mix(in srgb, #4b4b4b, black 20%);
+  --dark-color-900: color-mix(in srgb, #4b4b4b, black 25%);
+
+  //semi dark
+  --semi-dark-color: 36 39 69;
+}
