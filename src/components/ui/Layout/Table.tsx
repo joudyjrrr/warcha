@@ -35,7 +35,7 @@ const Table = ({ table, ...props }: DataTableProps) => {
         table: {
           style: {
             background: "var(--background-color)",
-          
+            border: table.data.length === 0 ? "none" : "1px solid #dbdade",
           },
         },
       }}
