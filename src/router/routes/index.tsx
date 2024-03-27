@@ -1,20 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy } from "react";
+
 export default function Routes() {
+  const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
   return createBrowserRouter([
-    // {
-    //   path: "/",
-    //   element: <ClientRoot />,
-    //   errorElement: <ErrorPage />,
-    //   children: [
-    //     { path: "/", element: <Home /> },
-    //     // { path: "/products", element: <Products /> },
-    //     {
-    //       path: "/products/:productId",
-    //       element: <ShowProduct />,
-    //     },
-    //     { path: "/categories", element: <Categories /> },
-    //     { path: "/categories/:categoryId/products", element: <Products /> },
-    //   ],
-    // },
+    {
+      path: "/",
+      children: [
+        { path: "/", element: <h1>hi</h1> },
+        { path: "/currencies", element: <Currencies /> },
+      ],
+    },
   ]);
 }

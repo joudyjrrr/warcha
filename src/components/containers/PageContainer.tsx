@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { CiFilter } from "react-icons/ci";
-import { Table } from "../ui/dashboardLayout";
+import Table  from "../ui/Layout/Table";
 import { Link, useLocation } from "react-router-dom";
 import { TableProps } from "../../types";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 type PageContainerProps = {
   addFunction?: { children: React.ReactNode; click?: () => void };
