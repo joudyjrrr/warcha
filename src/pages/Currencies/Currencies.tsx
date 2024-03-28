@@ -3,7 +3,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import moment from "moment";
-
+import { IGetCurrency } from "@/types/currencies";
 const Currencies = () => {
   const { data, isFetching } = useQuery({
     queryKey: ["get-currencies"],
@@ -15,7 +15,7 @@ const Currencies = () => {
     },
   });
   console.log(data?.data?.data);
-  const cols: TableColumn<any>[] = [
+  const cols: TableColumn<IGetCurrency>[] = [
     {
       id: "currency",
       name: "Currency ",
