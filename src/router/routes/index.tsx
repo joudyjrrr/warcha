@@ -6,6 +6,8 @@ export default function Routes() {
   const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
   const PayTypes = lazy(() => import("../../pages/PayTypes/PayTypes"));
   const Suppliers = lazy(() => import("../../pages/Suppliers/Suppliers"));
+  const ProductCategory = lazy(() => import("../../pages/productCategory/ProductCategory"));
+
 
   return createBrowserRouter([
     {
@@ -16,6 +18,8 @@ export default function Routes() {
         { path: "/currencies", element: <Currencies /> },
         { path: "/pay-types", element: <PayTypes /> },
         { path: "/suppliers", element: <Suppliers /> },
+        { path: "/product-category", element: <ProductCategory /> },
+
       ],
     },
   ]);

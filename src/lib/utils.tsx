@@ -32,21 +32,16 @@ export const NavigationProject = [
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
   },
-  // {
-  //   title: "الأقسام",
-  //   path: "/categories",
-  //   query: "",
-  //   list: [
-  //     {
-  //       titleLink: "2الرئيسية",
-  //       path: "/",
-  //       query: "",
-  //     },
-  //     {
-  //       titleLink: "3الرئيسية",
-  //       path: "/",
-  //       query: "",
-  //     },
-  //   ],
-  // },
+  {
+    titleLink: "أنواع المنتجات",
+    path: "/product-category",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
+  {
+    titleLink: "أنواع الموظفين",
+    path: "/employee-type",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
 ];
