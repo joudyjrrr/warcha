@@ -5,3 +5,7 @@ export type CurrencyData = {
   id: number;
   updated_at: Date;
 };
+export type ICurrency = {
+  currency: string;
+  dollar_price: number;
+}

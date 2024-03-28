@@ -33,9 +33,9 @@ function PageContainer({
   const [filterState, setFilterState] = useState(false);
   const location = useLocation();
   return (
-    <main className="container mx-auto pt-9">
+    <main className="container mx-auto pt-9 bg-white">
       {breadcrumb && (
-        <Breadcrumb>
+        <Breadcrumb className="border-b border-[#DBDAD] pb-4  mb-8">
           <BreadcrumbList>
             {breadcrumb.map((bread, index) => (
               <>

@@ -1,7 +1,7 @@
-const AddPrefix = (url: string) => "/dashboard/getPublicData" + url;
+const AddPrefix = (url: string) => "/dashboard" + url;
 
 const suppliers = {
-  index: AddPrefix(``),
+  index: AddPrefix(`/getSupplier`),
   buttons: {
     add: AddPrefix(`/add`),
     update: AddPrefix(`/update`),

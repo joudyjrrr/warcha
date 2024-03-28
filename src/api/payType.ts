@@ -1,9 +1,9 @@
-const AddPrefix = (url: string) => "/dashboard/getPayType" + url;
+const AddPrefix = (url: string) => "/dashboard" + url;
 
 const payType = {
-  index: AddPrefix(``),
+  index: AddPrefix(`/getPayType`),
   buttons: {
-    add: AddPrefix(`/add`),
+    add: AddPrefix(`/createPayType?`),
     update: AddPrefix(`/update`),
     delete: (id: string | number) => AddPrefix(`/delete/${id}`),
   },

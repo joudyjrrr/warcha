@@ -26,3 +26,4 @@ export type {
   CurrencyData,
   PayTypeData,
 };
+export type TModalState = "add" | "edit" | "show" | "delete" | "toggle" | null;

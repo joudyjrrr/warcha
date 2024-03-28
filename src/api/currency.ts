@@ -1,10 +1,10 @@
-const AddPrefix = (url: string) => "/dashboard/getPublicData" + url;
+const AddPrefix = (url: string) => "/dashboard" + url;
 
 const currency = {
-  index: AddPrefix(``),
+  index: AddPrefix(`/getPublicData`),
   buttons: {
-    add: AddPrefix(`/add`),
-    update: AddPrefix(`/update`),
+    add: AddPrefix(`/createPublicData`),
+    update: (id: string | number) => `/updatePublicData/${id}`,
     delete: (id: string | number) => AddPrefix(`/delete/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),

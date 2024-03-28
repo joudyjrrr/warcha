@@ -12,7 +12,7 @@ const Suppliers = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-suppliers"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.payType.index);
+      const { data } = await axios.get(apiRoutes.supplier.index);
       return data.data;
     },
   });
@@ -47,12 +47,12 @@ const Suppliers = () => {
       ),
     },
   ];
-  console.log("test: ", data);
+  console.log("test: ", data.data);
   return (
     <PageContainer
       table={{
         columns: cols,
-        data: data ?? [],
+        data: data.data ?? [],
         loading: isFetching,
         error: error,
         paginationProps: {
