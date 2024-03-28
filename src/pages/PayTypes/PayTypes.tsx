@@ -2,17 +2,17 @@ import { PageContainer } from "@/components/containers";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import moment from "moment";
-import { CurrencyData } from "@/types";
+import { PayTypeData } from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
-const Currencies = () => {
+const PayTypes = () => {
   const { data, isFetching, error } = useQuery({
-    queryKey: ["get-currencies"],
+    queryKey: ["get-payTypes"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.currency.index);
+      const { data } = await axios.get(apiRoutes.payType.index);
       return data.data;
     },
   });
@@ -21,24 +21,18 @@ const Currencies = () => {
     activePage: 1,
     perPage: 20,
   });
-  const cols: TableColumn<CurrencyData>[] = [
+  const cols: TableColumn<PayTypeData>[] = [
     {
-      id: "currency",
-      name: "اسم العملة ",
-      cell: (row) => <div title={row.currency}>{row.currency}</div>,
+      id: "name",
+      name: "اسم الطريقة ",
+      cell: (row) => <div title={row.name}>{row.name}</div>,
     },
-    {
-      id: "dollar_price",
-      name: "سعر بالدولار",
-      cell: (row) => (
-        <div title={row.dollar_price.toString()}>{row.dollar_price}</div>
-      ),
-    },
+
     {
       id: "created_at",
       name: "تاريخ الانشاء",
       cell: (row) => (
-        <div title={row.currency}>
+        <div title={moment(row.created_at).format("YYYY/MMMM/DDDD")}>
           {moment(row.created_at).format("YYYY/MMMM/DDDD")}
         </div>
       ),
@@ -47,17 +41,18 @@ const Currencies = () => {
       id: "updated_at",
       name: "آخر تعديل",
       cell: (row) => (
-        <div title={row.currency}>
+        <div title={moment(row.updated_at).format("YYYY/MMMM/DDDD")}>
           {moment(row.updated_at).format("YYYY/MMMM/DDDD")}
         </div>
       ),
     },
   ];
+  console.log("test: ", data);
   return (
     <PageContainer
       table={{
         columns: cols,
-        data: data?.data ?? [],
+        data: data ?? [],
         loading: isFetching,
         error: error,
         paginationProps: {
@@ -69,9 +64,9 @@ const Currencies = () => {
           setPaginationPage: setPaginationPage,
         },
       }}
-      breadcrumb={[{ title: "العملات" }]}
+      breadcrumb={[{ title: "طرق الدفع" }]}
     ></PageContainer>
   );
 };
 
-export default Currencies;
+export default PayTypes;

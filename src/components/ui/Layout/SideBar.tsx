@@ -1,9 +1,7 @@
-"use client";
 import { useWindowSize } from "@/hooks";
 import { NavigationProject, cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
-import { SiNextdotjs } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { FaHome } from "react-icons/fa";
 import {
@@ -12,10 +10,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Logo } from "@/assets/svgs";
 
 function SideBar() {
   const [expanded, setExpanded] = useState(false);
   const size = useWindowSize();
+  const location = useLocation();
+
   useEffect(() => {
     window.onresize = () => {
       if (size.width) {
@@ -31,14 +33,13 @@ function SideBar() {
       className={cn(
         `bg-white shadow-[0px_0px_8px_1px_rgba(0,0,0,0.4)] transition-all relative border-l min-h-svh`,
         {
-          "w-3/12": expanded,
+          "w-[320px]": expanded,
           "w-auto": !expanded,
         }
       )}
     >
-      <div className="pt-4 flex items-center px-6 gap-4">
-        <SiNextdotjs size={"3rem"} />
-        {expanded && <p className="text-2xl">logo</p>}
+      <div className="pt-4 flex items-center gap-4">
+        <Logo />
       </div>
       <Button
         variant="outline"
@@ -52,30 +53,30 @@ function SideBar() {
           className={cn("transition-all", { "rotate-180": expanded })}
         />
       </Button>
-      <div className="flex flex-col items-center py-8">
+      <div className="flex flex-col items-center py-8 text-gray-600">
         {NavigationProject.map((link, index) =>
           link.titleLink ? (
             expanded ? (
               <Button
                 key={`${index}`}
-                variant="ghost"
-                className="justify-start w-full px-6"
+                variant={link.path === location.pathname ? "default" : "ghost"}
+                className={cn("justify-start w-full px-6")}
                 asChild
               >
-                <Link href={link.path} className="text-xl">
-                  <FaHome size={"1.5rem"} className="me-4" />
+                <NavLink to={link.path} className={cn("text-xl")}>
+                  {link.icon}
                   {link.titleLink}
-                </Link>
+                </NavLink>
               </Button>
             ) : (
               <Button
                 key={`${index}`}
-                variant="ghost"
+                variant={link.path === location.pathname ? "default" : "ghost"}
                 className="w-full"
                 size="icon"
                 asChild
               >
-                <Link href={link.path}>
+                <Link to={link.path}>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger className="w-full h-full text-center justify-center flex items-center">

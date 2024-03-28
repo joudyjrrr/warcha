@@ -6,12 +6,12 @@ import Axios, {
 import { toast } from 'react-hot-toast'
 
 const axios: AxiosInstance = Axios.create({
-  baseURL: process.env.HOST_API,
+  baseURL: "https://warsha.htc-company.com/public/api",
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
-})
+});
 
 axios.interceptors.request.use(
   (request: InternalAxiosRequestConfig) => {
