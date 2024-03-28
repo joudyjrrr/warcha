@@ -9,7 +9,7 @@ import { TableProps } from "@/types";
 import { Loader2 } from "lucide-react";
 type DataTableProps = {
   table: TableProps;
-  [props: string]: any;
+  [props: string]: unknown;
 };
 const Table = ({ table, ...props }: DataTableProps) => {
   return (
@@ -27,15 +27,16 @@ const Table = ({ table, ...props }: DataTableProps) => {
           )}
         >
           <h3 className="py-12 text-center font-semibold">
-            جار تحميل البيانات <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            جار تحميل البيانات
           </h3>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" size={"2.5rem"} />
         </div>
       }
       customStyles={{
         table: {
           style: {
             background: "var(--background-color)",
-          
+            border: table.data.length === 0 ? "none" : "1px solid #dbdade",
           },
         },
       }}

@@ -1,8 +1,11 @@
+import { SideBar } from "@/components/ui/Layout";
 import { Outlet } from "react-router-dom";
-
-export default function DashboardRoot() {
+import { Toaster } from "@/components/ui/sonner";
+export default function RootLayout() {
   return (
     <>
+      <Toaster className="text-primary" />
+      <SideBar />
       <Outlet />
     </>
   );

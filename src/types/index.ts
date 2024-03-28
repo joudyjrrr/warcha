@@ -6,6 +6,8 @@ import {
   Images,
   ModalStates,
 } from "./shared";
+import { CurrencyData } from "./currency";
+import { PayTypeData } from "./payType";
 export type TResponse<
   DataType,
   isArray extends boolean | undefined = undefined
@@ -21,4 +23,7 @@ export type {
   TestProps,
   ModalStates,
   Images,
+  CurrencyData,
+  PayTypeData,
 };
+export type TModalState = "add" | "edit" | "show" | "delete" | "toggle" | null;

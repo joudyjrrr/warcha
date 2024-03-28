@@ -22,7 +22,7 @@ export type TableProps<T = any> = {
       React.SetStateAction<{ activePage: number; perPage: number }>
     >
   }
-  setRefresh: React.Dispatch<React.SetStateAction<boolean>>
+  // setRefresh: React.Dispatch<React.SetStateAction<boolean>>
   loading: boolean
   error: any
   data: T[]
