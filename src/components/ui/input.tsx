@@ -28,7 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          "flex   border border-grey-300 rounded-radius_md ",
+          "flex   border border-[#969AA0] rounded-[8px] ",
           containerClassName
         )}
       >

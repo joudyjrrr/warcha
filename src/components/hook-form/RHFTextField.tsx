@@ -43,8 +43,8 @@ const RHFTextField: React.FunctionComponent<RHFTextFieldProps> = ({
   const passwordIcon = renderIcon(type === "password" && showPassword);
 
   return (
-    <div className={cn("mb-spacing_3xl w-full", className)}>
-      <Label>{label}</Label>
+    <div className={cn("mb-spacing_3xl w-full flex gap-4 flex-col", className)}>
+      <Label className="">{label}</Label>
       <FormField
         name={name as string}
         control={control}
@@ -52,6 +52,7 @@ const RHFTextField: React.FunctionComponent<RHFTextFieldProps> = ({
           <FormItem>
             <FormControl>
               <Input
+              cl
                 endAdornmentClassName={endAdornmentClassName}
                 {...field}
                 placeholder={placeholder ? placeholder : undefined}

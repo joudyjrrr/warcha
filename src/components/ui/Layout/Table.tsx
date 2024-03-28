@@ -23,10 +23,10 @@ const Table = ({ table, ...props }: DataTableProps) => {
       progressComponent={
         <div
           className={cn(
-            "flex h-[400px] w-full items-center justify-center gap-4 rounded-lg bg-background p-2  text-2xl text-gray-400"
+            "flex h-[400px] w-full items-center justify-center gap-4 rounded-lg bg-white p-2  text-2xl text-gray-400"
           )}
         >
-          <h3 className="py-12 text-center font-semibold">
+          <h3 className="py-12 text-center  text-primary font-semibold">
             جار تحميل البيانات
           </h3>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" size={"2.5rem"} />
@@ -35,10 +35,26 @@ const Table = ({ table, ...props }: DataTableProps) => {
       customStyles={{
         table: {
           style: {
-            background: "var(--background-color)",
-            border: table.data.length === 0 ? "none" : "1px solid #dbdade",
+            background: "#fff",
+          },
+          
+        },
+        headCells:{
+          style: {
+           color:"#969AA0",
+           fontWeight:"400",
+           fontSize:"12px",
+    
           },
         },
+        cells:{
+          style:{
+            color:"#1D1F1F",
+            fontWeight:"400",
+            fontSize:"16px",
+
+          }
+        }
       }}
       progressPending={table.loading}
       noDataComponent={
@@ -50,7 +66,7 @@ const Table = ({ table, ...props }: DataTableProps) => {
             "flex h-[400px] w-full items-center justify-center gap-4 rounded-lg border-none bg-background  p-2 text-2xl text-gray-400"
           )}
         >
-          <FaInfoCircle />
+          <FaInfoCircle className="text-primary text-xl"/>
           <h3 className="py-12 text-center font-semibold">لا يوجد بيانات</h3>
         </div>
       }

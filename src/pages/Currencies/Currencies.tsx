@@ -6,11 +6,13 @@ import moment from "moment";
 import { CurrencyData, TModalState } from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
+import { FaPlus } from "react-icons/fa6";
 import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import AddCurrecis from "./AddCurrecis";
+import { ICurrency } from "@/types/currency";
 const Currencies = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-currencies"],
@@ -20,7 +22,7 @@ const Currencies = () => {
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState();
+  const [selectedRow, setSelectedRow] = useState<ICurrency>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
@@ -69,7 +71,7 @@ const Currencies = () => {
           }}
           className="flex justify-center items-center text-center cursor-pointer"
         >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
+          <FiEdit className="text-gray text-lg hover:text-pretty" />
         </div>
       ),
     },
@@ -78,16 +80,16 @@ const Currencies = () => {
   return (
     <>
       <PageContainer
-        addFunction={{
-          click() {
-            setModalState("add");
-          },
-          children: (
-            <>
-              <Button>أضافة عملة </Button>
-            </>
-          ),
-        }}
+          addFunction={{
+            click() {
+              setModalState("add");
+            },
+            children: (
+              <>
+                <Button>أضافة عملة  <FaPlus className="text-white text-md"/></Button>
+              </>
+            ),
+          }}
         table={{
           columns: cols,
           data: data?.data ?? [],

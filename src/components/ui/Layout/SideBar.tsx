@@ -31,15 +31,16 @@ function SideBar() {
   return (
     <aside
       className={cn(
-        `bg-white shadow-[0px_0px_8px_1px_rgba(0,0,0,0.4)] transition-all relative border-l min-h-svh`,
+        `bg-primary shadow-[0px_0px_8px_1px_rgba(0,0,0,0.4)] transition-all relative border-l min-h-svh`,
         {
           "w-[320px]": expanded,
           "w-auto": !expanded,
         }
       )}
     >
-      <div className="pt-4 flex items-center gap-4">
+      <div className="pt-4 justify-center flex  flex-col items-center">
         <Logo />
+        <h1 className="text-white text-xl font-md">HTC</h1>
       </div>
       <Button
         variant="outline"
@@ -59,8 +60,8 @@ function SideBar() {
             expanded ? (
               <Button
                 key={`${index}`}
-                variant={link.path === location.pathname ? "default" : "ghost"}
-                className={cn("justify-start w-full px-6")}
+                variant={"link"}
+                className={`justify-start w-full px-6 border-b border-white hover:!text-white  text-white ${link.path === location.pathname  &&  'bg-white text-primary'}`}
                 asChild
               >
                 <NavLink to={link.path} className={cn("text-xl")}>

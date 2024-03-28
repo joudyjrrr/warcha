@@ -24,7 +24,7 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "#002B5D",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -49,6 +49,10 @@ module.exports = {
         },
         card: {
           DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        gray: {
+          DEFAULT: "#969AA0",
           foreground: "hsl(var(--card-foreground))",
         },
       },

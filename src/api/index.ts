@@ -1,5 +1,7 @@
 import currency from "./currency";
 import payType from "./payType";
-const apiRoutes = { currency, payType };
+import supplier from "./supplier";
+
+const apiRoutes = { currency, payType  , supplier};
 
 export default apiRoutes;
