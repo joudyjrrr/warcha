@@ -3,7 +3,6 @@ import { NavigationProject, cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import { FaHome } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
@@ -81,7 +80,7 @@ function SideBar() {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger className="w-full h-full text-center justify-center flex items-center">
-                        <FaHome size={"1.5rem"} />
+                        {link.icon}
                       </TooltipTrigger>
                       <TooltipContent>
                         <p>{link.titleLink}</p>

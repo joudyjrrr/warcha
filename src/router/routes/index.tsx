@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import RootLayout from "../RootLayout";
+import ServiceDepartments from "@/pages/ServiceDepartments/ServiceDepartments";
 
 export default function Routes() {
   const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
@@ -19,7 +20,7 @@ export default function Routes() {
         { path: "/pay-types", element: <PayTypes /> },
         { path: "/suppliers", element: <Suppliers /> },
         { path: "/product-category", element: <ProductCategory /> },
-
+        { path: "/service-department", element: <ServiceDepartments /> },
       ],
     },
   ]);

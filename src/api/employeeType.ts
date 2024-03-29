@@ -1,13 +1,13 @@
 const AddPrefix = (url: string) => "/dashboard" + url;
 
-const suppliers = {
-  index: AddPrefix(`/getSupplier`),
+const employeeType = {
+  index: AddPrefix(`/getEmployeeType`),
   buttons: {
-    add: AddPrefix(`/createSupplier`),
-    update: AddPrefix(`/updateSupplier`),
+    add: AddPrefix(`/createEmployeeType`),
+    update: AddPrefix(`/update`),
     delete: (id: string | number) => AddPrefix(`/delete/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };
 
-export default suppliers;
+export default employeeType;

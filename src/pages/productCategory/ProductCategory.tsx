@@ -3,34 +3,31 @@ import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import { FiEdit } from "react-icons/fi";
 import moment from "moment";
-import { CurrencyData, TModalState } from "@/types";
+import { ModalStates, ProductCategoryData } from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
 import { FaPlus } from "react-icons/fa6";
 import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ICurrency } from "@/types/currency";
 import AddProductCategory from "./AddProductCategory";
-import { IProductCatgory } from "@/types/productCategory";
 const ProductCategory = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-prod-cat"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.productCatgory.index);
+      const { data } = await axios.get(apiRoutes.productCategory.index);
       return data.data;
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<IProductCatgory>();
+  const [selectedRow, setSelectedRow] = useState<ProductCategoryData>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
   });
-  const [modalState, setModalState] = useState<TModalState>(null);
+  const [modalState, setModalState] = useState<ModalStates>(null);
 
-  const cols: TableColumn<IProductCatgory>[] = [
+  const cols: TableColumn<ProductCategoryData>[] = [
     {
       id: "name",
       name: "الاسم",
@@ -39,28 +36,28 @@ const ProductCategory = () => {
     {
       id: "image.file_name",
       name: "الصورة",
-      cell: (row) => <img src={`https://warsha.htc-company.com/public/getImage/${row.image?.file_name}`}/>
+      cell: (row) => (
+        <img
+          src={`https://warsha.htc-company.com/public/getImage/${row.image?.file_name}`}
+        />
+      ),
     },
     {
       id: "created_at",
       name: "تاريخ الانشاء",
       cell: (row) => (
-        <div>
-          {moment(row.created_at).format("YYYY/MMMM/DDDD")}
-        </div>
+        <div>{moment(row.created_at).format("YYYY/MMMM/DDDD")}</div>
       ),
     },
     {
       id: "updated_at",
       name: "آخر تعديل",
       cell: (row) => (
-        <div >
-          {moment(row.updated_at).format("YYYY/MMMM/DDDD")}
-        </div>
+        <div>{moment(row.updated_at).format("YYYY/MMMM/DDDD")}</div>
       ),
     },
     {
-      id: "updated_at",
+      id: "actions",
       name: "التحكم",
       cell: (row) => (
         <div
@@ -85,9 +82,8 @@ const ProductCategory = () => {
           },
           children: (
             <>
-              <Button>
-                أضافة نوع منتج <FaPlus className="text-white text-md" />
-              </Button>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة نوع منتج</p>
             </>
           ),
         }}
@@ -107,13 +103,12 @@ const ProductCategory = () => {
         }}
         breadcrumb={[{ title: "العملات" }]}
       ></PageContainer>
-      {(modalState === "add" || modalState === "edit")&& (
+      {(modalState === "add" || modalState === "edit") && (
         <AddProductCategory
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}
           formValues={modalState === "edit" ? selectedRow : undefined}
         />
-        
       )}
     </>
   );

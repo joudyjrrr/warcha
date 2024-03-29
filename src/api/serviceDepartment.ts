@@ -1,13 +1,13 @@
 const AddPrefix = (url: string) => "/dashboard" + url;
 
-const productCatgory = {
-  index: AddPrefix(`/getProductCategory`),
+const serviceDepartment = {
+  index: AddPrefix(`/getServiceDepartment`),
   buttons: {
-    add: AddPrefix(`/createProductCategory`),
+    add: AddPrefix(`/createServiceDepartment`),
     update: AddPrefix(`/update`),
     delete: (id: string | number) => AddPrefix(`/delete/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };
 
-export default productCatgory;
+export default serviceDepartment;

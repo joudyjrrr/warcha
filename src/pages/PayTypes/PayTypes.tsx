@@ -2,7 +2,7 @@ import { PageContainer } from "@/components/containers";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import moment from "moment";
-import { PayTypeData, TModalState } from "@/types";
+import { ModalStates, PayTypeData } from "@/types";
 import "moment/locale/ar";
 import { FiEdit } from "react-icons/fi";
 import axios from "@/lib/axios";
@@ -10,7 +10,7 @@ import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import AddPerType from "./AddPerType";
-import { Button } from "@/components/ui/button";
+import { FaPlus } from "react-icons/fa6";
 const PayTypes = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-payTypes"],
@@ -25,7 +25,7 @@ const PayTypes = () => {
     activePage: 1,
     perPage: 20,
   });
-  const [modalState, setModalState] = useState<TModalState>(null);
+  const [modalState, setModalState] = useState<ModalStates>(null);
 
   const cols: TableColumn<PayTypeData>[] = [
     {
@@ -53,7 +53,7 @@ const PayTypes = () => {
       ),
     },
     {
-      id: "updated_at",
+      id: "actions",
       name: "التحكم",
       cell: (row) => (
         <div
@@ -77,7 +77,8 @@ const PayTypes = () => {
           },
           children: (
             <>
-              <Button>إضافة طريقة دفع </Button>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة طريقة دفع </p>
             </>
           ),
         }}

@@ -1,51 +1,52 @@
 import { PageContainer } from "@/components/containers";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
-import { FiEdit } from "react-icons/fi";
 import moment from "moment";
-import { CurrencyData, ModalStates } from "@/types";
+import {
+  ModalStates,
+  ServiceDepartmentData
+} from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
-import { FaPlus } from "react-icons/fa6";
 import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import AddCurrecis from "./AddCurrency";
-import { CurrencyFormData } from "@/types/currency";
-const Currencies = () => {
+import { FaPlus } from "react-icons/fa6";
+import { FiEdit } from "react-icons/fi";
+import AddServiceDepartment from "./AddEmployeeType";
+const EmployeeType = () => {
   const { data, isFetching, error } = useQuery({
-    queryKey: ["get-currencies"],
+    queryKey: ["get-employee-type"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.currency.index);
+      const { data } = await axios.get(apiRoutes.employeeType.index);
       return data.data;
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<CurrencyFormData>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
   });
+  const [selectedRow, setSelectedRow] = useState<ServiceDepartmentData>();
   const [modalState, setModalState] = useState<ModalStates>(null);
 
-  const cols: TableColumn<CurrencyData>[] = [
+  const cols: TableColumn<ServiceDepartmentData>[] = [
     {
-      id: "currency",
-      name: "اسم العملة ",
-      cell: (row) => <div title={row.currency}>{row.currency}</div>,
+      id: "name",
+      name: "اسم الخدمة",
+      cell: (row) => <div title={row.name}>{row.name}</div>,
     },
+
     {
-      id: "dollar_price",
-      name: "سعر بالدولار",
-      cell: (row) => (
-        <div title={row.dollar_price.toString()}>{row.dollar_price}</div>
-      ),
+      id: "description",
+      name: "وصف الخدمة",
+      cell: (row) => <div title={row.description}>{row.description}</div>,
     },
     {
       id: "created_at",
       name: "تاريخ الانشاء",
       cell: (row) => (
-        <div title={row.currency}>
+        <div title={moment(row.created_at).format("YYYY/MMMM/DDDD")}>
           {moment(row.created_at).format("YYYY/MMMM/DDDD")}
         </div>
       ),
@@ -54,7 +55,7 @@ const Currencies = () => {
       id: "updated_at",
       name: "آخر تعديل",
       cell: (row) => (
-        <div title={row.currency}>
+        <div title={moment(row.updated_at).format("YYYY/MMMM/DDDD")}>
           {moment(row.updated_at).format("YYYY/MMMM/DDDD")}
         </div>
       ),
@@ -75,46 +76,45 @@ const Currencies = () => {
       ),
     },
   ];
-
+  console.log("data: ", data);
   return (
-    <>
-      <PageContainer
-        addFunction={{
-          click() {
-            setModalState("add");
+    <PageContainer
+      addFunction={{
+        click() {
+          setModalState("add");
+        },
+        children: (
+          <>
+            <FaPlus className="text-white text-md" />
+            <p>إضافة خدمة</p>
+          </>
+        ),
+      }}
+      table={{
+        columns: cols,
+        data: data ?? [],
+        loading: isFetching,
+        error: error,
+        paginationProps: {
+          paginationPage: {
+            activePage: searchParams.get("page") || paginationPage.activePage,
+            perPage: searchParams.get("perPage") || paginationPage.perPage,
           },
-          children: (
-            <>
-              <FaPlus className="text-white text-md" />
-              <p>إضافة عملة</p>
-            </>
-          ),
-        }}
-        table={{
-          columns: cols,
-          data: data?.data ?? [],
-          loading: isFetching,
-          error: error,
-          paginationProps: {
-            paginationPage: {
-              activePage: searchParams.get("page") || paginationPage.activePage,
-              perPage: searchParams.get("perPage") || paginationPage.perPage,
-            },
-            paginationTotal: 0,
-            setPaginationPage: setPaginationPage,
-          },
-        }}
-        breadcrumb={[{ title: "العملات" }]}
-      ></PageContainer>
+          paginationTotal: 0,
+          setPaginationPage: setPaginationPage,
+        },
+      }}
+      breadcrumb={[{ title: "المزودين" }]}
+    >
       {(modalState === "add" || modalState === "edit") && (
-        <AddCurrecis
+        <AddServiceDepartment
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}
           formValues={modalState === "edit" ? selectedRow : undefined}
         />
       )}
-    </>
+    </PageContainer>
   );
 };
 
-export default Currencies;
+export default EmployeeType;

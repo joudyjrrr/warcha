@@ -6,8 +6,12 @@ import {
   Images,
   ModalStates,
 } from "./shared";
-import { CurrencyData } from "./currency";
+import { CurrencyData, CurrencyFormData } from "./currency";
 import { PayTypeData } from "./payType";
+import { SupplierData } from "./supplier";
+import { ProductCategoryData } from "./productCategory";
+import { ServiceDepartmentData } from "./serviceDepartment";
+
 export type TResponse<
   DataType,
   isArray extends boolean | undefined = undefined
@@ -25,5 +29,8 @@ export type {
   Images,
   CurrencyData,
   PayTypeData,
+  SupplierData,
+  ProductCategoryData,
+  CurrencyFormData,
+  ServiceDepartmentData,
 };
-export type TModalState = "add" | "edit" | "show" | "delete" | "toggle" | null;

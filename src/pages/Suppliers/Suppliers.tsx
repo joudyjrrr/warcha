@@ -2,12 +2,15 @@ import { PageContainer } from "@/components/containers";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import moment from "moment";
-import { PayTypeData } from "@/types";
+import { ModalStates, SupplierData } from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import AddSupplier from "./AddSupplier";
+import { FaPlus } from "react-icons/fa6";
+import { FiEdit } from "react-icons/fi";
 const Suppliers = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-suppliers"],
@@ -21,13 +24,32 @@ const Suppliers = () => {
     activePage: 1,
     perPage: 20,
   });
-  const cols: TableColumn<PayTypeData>[] = [
+  const [selectedRow, setSelectedRow] = useState<SupplierData>();
+  const [modalState, setModalState] = useState<ModalStates>(null);
+
+  const cols: TableColumn<SupplierData>[] = [
     {
       id: "name",
-      name: "اسم الطريقة ",
+      name: "اسم المزود",
       cell: (row) => <div title={row.name}>{row.name}</div>,
     },
-
+    {
+      id: "phone",
+      name: "رقم الموبايل",
+      cell: (row) => <div title={row.phone}>{row.phone}</div>,
+    },
+    {
+      id: "opening_balance",
+      name: "الرصيد الافتتاحي",
+      cell: (row) => (
+        <div title={row.opening_balance}>{row.opening_balance}</div>
+      ),
+    },
+    {
+      id: "opening_balance",
+      name: "الرصيد",
+      cell: (row) => <div title={row.money}>{row.money}</div>,
+    },
     {
       id: "created_at",
       name: "تاريخ الانشاء",
@@ -46,13 +68,38 @@ const Suppliers = () => {
         </div>
       ),
     },
+    {
+      id: "actions",
+      name: "التحكم",
+      cell: (row) => (
+        <div
+          onClick={() => {
+            setModalState("edit");
+            setSelectedRow(row);
+          }}
+          className="flex justify-center items-center text-center cursor-pointer"
+        >
+          <FiEdit className="text-gray text-lg hover:text-pretty" />
+        </div>
+      ),
+    },
   ];
-  console.log("test: ", data.data);
   return (
     <PageContainer
+      addFunction={{
+        click() {
+          setModalState("add");
+        },
+        children: (
+          <>
+            <FaPlus className="text-white text-md" />
+            <p>إضافة مزود</p>
+          </>
+        ),
+      }}
       table={{
         columns: cols,
-        data: data.data ?? [],
+        data: data?.data ?? [],
         loading: isFetching,
         error: error,
         paginationProps: {
@@ -65,7 +112,15 @@ const Suppliers = () => {
         },
       }}
       breadcrumb={[{ title: "المزودين" }]}
-    ></PageContainer>
+    >
+      {(modalState === "add" || modalState === "edit") && (
+        <AddSupplier
+          isOpen={modalState === "add" || modalState === "edit"}
+          onClose={() => setModalState(null)}
+          formValues={modalState === "edit" ? selectedRow : undefined}
+        />
+      )}
+    </PageContainer>
   );
 };
 

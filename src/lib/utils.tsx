@@ -33,6 +33,12 @@ export const NavigationProject = [
     query: "",
   },
   {
+    titleLink: "أنواع الخدمات",
+    path: "/service-department",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
+  {
     titleLink: "أنواع المنتجات",
     path: "/product-category",
     icon: <MdPayment size={"1.5rem"} className="me-4" />,

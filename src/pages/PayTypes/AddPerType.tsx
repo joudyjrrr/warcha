@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
@@ -10,7 +9,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { toast } from "sonner";
-import { ICurrency } from "@/types/currency";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PerTypeValidation } from "@/hooks/validation";
 

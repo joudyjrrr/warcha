@@ -1,4 +1,4 @@
-import React, {   useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
@@ -11,14 +11,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { toast } from "sonner";
-import { ICurrency } from "@/types/currency";
-import { CuuecisValidation } from "@/hooks/validation";
+import { CurrencyFormData } from "@/types/currency";
+import { CurrenciesValidation } from "@/hooks/validation";
 
 interface DialogContainerProps {
   dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
-  formValues?:ICurrency
+  formValues?: CurrencyFormData;
 }
 
 const AddCurrecis: React.FC<DialogContainerProps> = ({
@@ -27,7 +27,7 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
   formValues,
 }) => {
   const methods = useForm({
-    resolver: yupResolver(CuuecisValidation),
+    resolver: yupResolver(CurrenciesValidation),
   });
   const { handleSubmit, watch, reset } = methods;
   const { mutate, isPending } = useMutation({
@@ -47,14 +47,14 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
       },
     });
   };
-  useEffect(()=>{
-   if(formValues){
-    reset({
-        dollar_price:formValues.dollar_price,
-        currency:formValues.currency    
-    })
-   }
-  },[])
+  useEffect(() => {
+    if (formValues) {
+      reset({
+        dollar_price: formValues.dollar_price,
+        currency: formValues.currency,
+      });
+    }
+  }, []);
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -68,10 +68,19 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
             <RHFTextField name="currency" label="العملة" />
           </div>
           <div className="mt-6 flex basis-full  gap-4">
-            <Button disabled={isPending} type="submit" className="rounded-md flex-grow">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="rounded-md flex-grow"
+            >
               {isPending ? "الرجاء الانتظار" : "إضافة"}
             </Button>
-            <Button type="button" variant={"cancel"} className="flex-grow" onClick={() => onClose()}>
+            <Button
+              type="button"
+              variant={"cancel"}
+              className="flex-grow"
+              onClick={() => onClose()}
+            >
               إلغاء
             </Button>
           </div>

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
@@ -10,7 +9,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { toast } from "sonner";
-import { CurrencyFormData } from "@/types/currency";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PerTypeValidation } from "@/hooks/validation";
 
@@ -21,7 +19,7 @@ interface DialogContainerProps {
   formValues?: { name: string };
 }
 
-const AddProductCategory: React.FC<DialogContainerProps> = ({
+const AddSupplier: React.FC<DialogContainerProps> = ({
   isOpen,
   onClose,
   formValues,
@@ -32,7 +30,7 @@ const AddProductCategory: React.FC<DialogContainerProps> = ({
   const { handleSubmit, reset } = methods;
   const { mutate, isPending } = useMutation({
     mutationFn: async (data) => {
-      const res = await axios.post(apiRoutes.productCategory.buttons.add, data);
+      const res = await axios.post(apiRoutes.supplier.buttons.add, data);
       return res;
     },
   });
@@ -40,9 +38,9 @@ const AddProductCategory: React.FC<DialogContainerProps> = ({
   const submitHandler = (data: any) => {
     mutate(data, {
       onSuccess() {
-        toast("تمت إضافة نوع المنتج بنجاح");
+        toast("تمت إضافة المزود بنجاح");
         onClose();
-        queryClient.refetchQueries({ queryKey: ["get-prod-cat"] });
+        queryClient.refetchQueries({ queryKey: ["get-suppliers"] });
       },
     });
   };
@@ -58,9 +56,9 @@ const AddProductCategory: React.FC<DialogContainerProps> = ({
       <DialogContent>
         <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
           <div className="flex flex-col">
-            <RHFTextField name="name" type="text" label="الاسم" />
+            <RHFTextField name="name" type="text" label="اسم المزود" />
           </div>
-          <div className="mt-6 flex   gap-4">
+          <div className="mt-6 flex gap-4">
             <Button
               disabled={isPending}
               type="submit"
@@ -83,4 +81,4 @@ const AddProductCategory: React.FC<DialogContainerProps> = ({
   );
 };
 
-export default AddProductCategory;
+export default AddSupplier;

@@ -38,8 +38,8 @@ function PageContainer({
         <Breadcrumb className="border-b border-[#DBDAD] pb-4  mb-8">
           <BreadcrumbList>
             {breadcrumb.map((bread, index) => (
-              <>
-                <BreadcrumbItem key={index}>
+              <div key={index}>
+                <BreadcrumbItem>
                   {bread.href ? (
                     <BreadcrumbLink
                       className="text-2xl font-bold"
@@ -56,7 +56,7 @@ function PageContainer({
                 {index < breadcrumb.length - 1 && (
                   <BreadcrumbSeparator className="rotate-180 font-bold" />
                 )}
-              </>
+              </div>
             ))}
           </BreadcrumbList>
         </Breadcrumb>
