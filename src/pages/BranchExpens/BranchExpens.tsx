@@ -1,0 +1,141 @@
+import apiRoutes from "@/api";
+import axios from "@/lib/axios";
+import { ModalStates } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import AddBrancExpense from "./AddBrancExpense";
+import { PageContainer } from "@/components/containers";
+import { FaPlus } from "react-icons/fa6";
+import { FormProvider } from "@/components/hook-form/FormProvider";
+import RHFSelect from "@/components/hook-form/RHFSelect";
+import { useForm } from "react-hook-form";
+import { TableColumn } from "react-data-table-component";
+import moment from "moment";
+import { FiEdit } from "react-icons/fi";
+import { BranchExpensData } from "@/types/branchExpence";
+
+const BranchExpens = () => {
+  const methods = useForm();
+  const { watch } = methods;
+  const currentBranch = watch("branch_id");
+  const { data, isFetching, error } = useQuery({
+    queryKey: ["get-branch-exp", currentBranch],
+    queryFn: async () => {
+      const { data } = await axios.get(apiRoutes.banchExpens.index, {
+        params: { currentBranch },
+      });
+      return data.data;
+    },
+  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedRow, setSelectedRow] = useState<BranchExpensData>();
+  const [paginationPage, setPaginationPage] = useState({
+    activePage: 1,
+    perPage: 20,
+  });
+  const [modalState, setModalState] = useState<ModalStates>(null);
+  const cols: TableColumn<BranchExpensData>[] = [
+    {
+      id: "title",
+      name: "العنوان",
+      cell: (row) => <div title={row.currency}>{row.title}</div>,
+    },
+    {
+      id: "description",
+      name: "الوصف",
+      cell: (row) => <div>{row.description}</div>,
+    },
+    {
+      id: "total_price",
+      name: "السعر الاجمالي",
+      cell: (row) => <div>{row.total_price}</div>,
+    },
+    {
+      id: "created_at",
+      name: "تاريخ الانشاء",
+      cell: (row) => (
+        <div title={row.currency}>
+          {moment(row.created_at).format("YYYY/MMMM/DDDD")}
+        </div>
+      ),
+    },
+    {
+      id: "updated_at",
+      name: "آخر تعديل",
+      cell: (row) => (
+        <div title={row.currency}>
+          {moment(row.updated_at).format("YYYY/MMMM/DDDD")}
+        </div>
+      ),
+    },
+    {
+      id: "actions",
+      name: "التحكم",
+      cell: (row) => (
+        <div
+          onClick={() => {
+            setModalState("edit");
+            setSelectedRow(row);
+          }}
+          className="flex justify-center items-center text-center cursor-pointer"
+        >
+          <FiEdit className="text-gray text-lg hover:text-pretty" />
+        </div>
+      ),
+    },
+  ];
+  return (
+    <>
+      <PageContainer
+        breadcrumb={[{ title: " نفقات الفروع" }]}
+        table={{
+          columns: cols,
+          data: data?.data ?? [],
+          loading: isFetching,
+          error: error,
+          paginationProps: {
+            paginationPage: {
+              activePage: searchParams.get("page") || paginationPage.activePage,
+              perPage: searchParams.get("perPage") || paginationPage.perPage,
+            },
+            paginationTotal: 0,
+            setPaginationPage: setPaginationPage,
+          },
+        }}
+        filterComponent={
+          <FormProvider onSubmit={() => {}} methods={methods}>
+            <div className="w-[20rem]">
+              <RHFSelect
+                placeholder="اختر برانش"
+                label="البرانش"
+                name="branch_id"
+                pathApi={apiRoutes.branch.index}
+              />
+            </div>
+          </FormProvider>
+        }
+        addFunction={{
+          click() {
+            setModalState("add");
+          },
+          children: (
+            <>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة نفقات الفروع</p>
+            </>
+          ),
+        }}
+      />
+      {(modalState === "add" || modalState === "edit") && (
+        <AddBrancExpense
+          isOpen={modalState === "add" || modalState === "edit"}
+          onClose={() => setModalState(null)}
+          formValues={modalState === "edit" ? selectedRow : undefined}
+        />
+      )}
+    </>
+  );
+};
+
+export default BranchExpens;

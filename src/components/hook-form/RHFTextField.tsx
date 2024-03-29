@@ -52,7 +52,6 @@ const RHFTextField: React.FunctionComponent<RHFTextFieldProps> = ({
           <FormItem>
             <FormControl>
               <Input
-              cl
                 endAdornmentClassName={endAdornmentClassName}
                 {...field}
                 placeholder={placeholder ? placeholder : undefined}

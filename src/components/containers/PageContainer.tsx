@@ -63,15 +63,7 @@ function PageContainer({
       )}
 
       <div className="mb-4 flex justify-end gap-4">
-        {filterComponent && (
-          <Button
-            variant={"outline"}
-            onClick={() => setFilterState((prop) => !prop)}
-          >
-            <CiFilter size={"1.5rem"} />
-            <p>فلترة</p>
-          </Button>
-        )}
+       
         {addFunction && (
           <Button onClick={addFunction.click} variant={"default"}>
             {addFunction.children}
@@ -79,7 +71,7 @@ function PageContainer({
         )}
       </div>
 
-      {filterState && filterComponent}
+      {filterComponent}
       {pageTabs && (
         <div className="bg-secondary-500/10 mb-4 flex w-full overflow-hidden rounded-t-md border-b">
           {pageTabs.map((page, index) => (

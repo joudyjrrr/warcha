@@ -47,3 +47,7 @@ export type SelectedField = {
   id: number;
   value: string;
 };
+export type SelectOptions = {
+  id:string;
+  name:string;
+}
