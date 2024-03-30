@@ -10,9 +10,8 @@ export default function Routes() {
   const ProductCategory = lazy(() => import("../../pages/productCategory/ProductCategory"));
   const EmployeeTypes = lazy(() => import("../../pages/EmplyeeType/EmployeeType"));
   const BranchExpens = lazy(() => import("../../pages/BranchExpens/BranchExpens"));
-
-
-
+  const Branches = lazy(() => import("../../pages/Branches/Branches"));
+  
 
   return createBrowserRouter([
     {
@@ -27,6 +26,9 @@ export default function Routes() {
         { path: "/service-department", element: <ServiceDepartments /> },
         { path: "/employee-type", element: <EmployeeTypes /> },
         { path: "/banch-expens", element: <BranchExpens /> },
+        { path: "/banches", element: <Branches /> },
+        
+
 
 
       ],
