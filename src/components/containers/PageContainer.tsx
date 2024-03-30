@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { CiFilter } from "react-icons/ci";
+import React from "react";
 import Table from "../ui/Layout/Table";
 import { Link, useLocation } from "react-router-dom";
 import { TableProps } from "../../types";
@@ -30,7 +29,7 @@ function PageContainer({
   breadcrumb,
   pageTabs,
 }: PageContainerProps) {
-  const [filterState, setFilterState] = useState(false);
+  // const [filterState, setFilterState] = useState(false);
   const location = useLocation();
   return (
     <main className="container mx-auto pt-9 bg-white">
