@@ -37,24 +37,25 @@ const Table = ({ table, ...props }: DataTableProps) => {
           style: {
             background: "#fff",
           },
-          
         },
-        headCells:{
+        headCells: {
           style: {
-           color:"#969AA0",
-           fontWeight:"400",
-           fontSize:"12px",
-    
+            color: "#969AA0",
+            fontWeight: "400",
+            fontSize: "12px",
+            display: "flex",
+            justifyContent: "center",
           },
         },
-        cells:{
-          style:{
-            color:"#1D1F1F",
-            fontWeight:"400",
-            fontSize:"16px",
-
-          }
-        }
+        cells: {
+          style: {
+            color: "#1D1F1F",
+            fontWeight: "400",
+            fontSize: "16px",
+            display: "flex",
+            justifyContent: "center",
+          },
+        },
       }}
       progressPending={table.loading}
       noDataComponent={
@@ -66,7 +67,7 @@ const Table = ({ table, ...props }: DataTableProps) => {
             "flex h-[400px] w-full items-center justify-center gap-4 rounded-lg border-none bg-background  p-2 text-2xl text-gray-400"
           )}
         >
-          <FaInfoCircle className="text-primary text-xl"/>
+          <FaInfoCircle className="text-primary text-xl" />
           <h3 className="py-12 text-center font-semibold">لا يوجد بيانات</h3>
         </div>
       }
