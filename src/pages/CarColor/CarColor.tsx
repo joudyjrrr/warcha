@@ -9,11 +9,12 @@ import { TableColumn } from "react-data-table-component";
 import { useSearchParams } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { PageContainer } from "@/components/containers";
-
+import { CirclePicker } from "react-color";
 import { FaPlus } from "react-icons/fa6";
 import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
 import { CarColorData } from "@/types/CarColor";
+import AddCarColor from "./AddCarColor";
 
 const CarColor = () => {
   const { data, isFetching, error } = useQuery({
@@ -24,7 +25,7 @@ const CarColor = () => {
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<CarModelData>();
+  const [selectedRow, setSelectedRow] = useState<CarColorData>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
@@ -40,7 +41,14 @@ const CarColor = () => {
     {
       id: "code",
       name: "اللون",
-      cell: (row) => <div title={row.value}>{row.code}</div>,
+      cell: (row) => (
+        <div
+          className={`w-[30px] h-[30px] rounded-lg`}
+          style={{
+            background: row.code,
+          }}
+        ></div>
+      ),
     },
     {
       id: "created_at",
@@ -72,7 +80,7 @@ const CarColor = () => {
           </Button>
           <DeleteModal
             MassegeSuccess="تم الحذف بنجاح"
-            apiPath={apiRoutes.CarMode.buttons.delete(row.id!)}
+            apiPath={apiRoutes.CarColor.buttons.delete(row.id!)}
             refetch={() => {}}
           />
         </div>
@@ -97,18 +105,25 @@ const CarColor = () => {
           },
         }}
         breadcrumb={[{ title: "ألوان السيارات" }]}
-        // addFunction={{
-        //   click() {
-        //     setModalState("add");
-        //   },
-        //   children: (
-        //     <>
-        //       <FaPlus className="text-white text-md" />
-        //       <p>إضافة موديل </p>
-        //     </>
-        //   ),
-        // }}
+        addFunction={{
+          click() {
+            setModalState("add");
+          },
+          children: (
+            <>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة لون </p>
+            </>
+          ),
+        }}
       />
+        {(modalState === "add" || modalState === "edit") && (
+        <AddCarColor
+          isOpen={modalState === "add" || modalState === "edit"}
+          onClose={() => setModalState(null)}
+          formValues={modalState === "edit" ? selectedRow : undefined}
+        />
+      )}
     </>
   );
 };

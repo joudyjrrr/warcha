@@ -36,13 +36,13 @@ const AddCarMode: React.FC<DialogContainerProps> = ({
     },
   });
   const { mutate: Update } = useMutation({
-        mutationFn: async (data) => {
-        const res = await axios.post(
-            apiRoutes.CarMode.buttons.update(formValues?.id!),
-            data
-        );
-        return res;
-        },
+    mutationFn: async (data : CarModelData) => {
+      const res = await axios.post(
+        apiRoutes.CarMode.buttons.update + `/${formValues?.id}?${data.value}`,
+        data
+      );
+      return res;
+    },
   });
   console.log(formValues);
   const queryCliet = useQueryClient();

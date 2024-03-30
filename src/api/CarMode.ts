@@ -4,7 +4,7 @@ const CarMode = {
   index: AddPrefix(`/getCarModel`),
   buttons: {
     add: AddPrefix(`/createCarModel`),
-    update: (id: string | number) => `/updateCarModel/${id}`,
+    update: AddPrefix(`/updateCarModel`),
     delete: (id: string | number) => AddPrefix(`/DeleteCarModel/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
