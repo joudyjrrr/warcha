@@ -13,6 +13,7 @@ import apiRoutes from "@/api";
 import { toast } from "sonner";
 import { CurrencyFormData } from "@/types/currency";
 import { CurrenciesValidation } from "@/hooks/validation";
+import RHFInputFile from "@/components/hook-form/RHFInputFile";
 
 interface DialogContainerProps {
   dialogKey?: string;
@@ -55,6 +56,8 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
       });
     }
   }, []);
+ 
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -66,6 +69,7 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
               label="سعر بالدولار"
             />
             <RHFTextField name="currency" label="العملة" />
+            <RHFInputFile label="img" name="img"/>
           </div>
           <div className="mt-6 flex basis-full  gap-4">
             <Button
