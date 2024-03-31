@@ -9,13 +9,13 @@ import {
     onSubmit: React.FormEventHandler<HTMLFormElement>;
   }
   
-  export const FormProvider: React.FunctionComponent<FormProviderProps> = ({
+  export const FormProvider: React.FunctionComponent<any> = ({
     children,
     onSubmit,
     methods,
   }) => {
     return (
-      <Form {...methods}>
+      <Form   {...methods}>
         <form onSubmit={onSubmit}>{children}</form>
       </Form>
     );

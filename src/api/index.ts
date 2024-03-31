@@ -6,17 +6,23 @@ import serviceDepartment from "./serviceDepartment";
 import employeeType from "./employeeType";
 import banchExpens from "./banchExpens";
 import branch from "./branch";
+import CarMode from "./CarMode";
+import CarColor from "./CarColor";
+
+
 
 
 const apiRoutes = {
   currency,
+  CarColor,
   payType,
   supplier,
   productCategory,
   serviceDepartment,
   employeeType,
   banchExpens,
-  branch
+  branch,
+  CarMode
 };
 
 export default apiRoutes;

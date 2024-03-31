@@ -7,11 +7,18 @@ export default function Routes() {
   const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
   const PayTypes = lazy(() => import("../../pages/PayTypes/PayTypes"));
   const Suppliers = lazy(() => import("../../pages/Suppliers/Suppliers"));
-  const ProductCategory = lazy(() => import("../../pages/productCategory/ProductCategory"));
-  const EmployeeTypes = lazy(() => import("../../pages/EmplyeeType/EmployeeType"));
-  const BranchExpens = lazy(() => import("../../pages/BranchExpens/BranchExpens"));
+  const ProductCategory = lazy(
+    () => import("../../pages/productCategory/ProductCategory")
+  );
+  const EmployeeTypes = lazy(
+    () => import("../../pages/EmplyeeType/EmployeeType")
+  );
+  const BranchExpens = lazy(
+    () => import("../../pages/BranchExpens/BranchExpens")
+  );
   const Branches = lazy(() => import("../../pages/Branches/Branches"));
-  
+  const CarModel = lazy(() => import("../../pages/CarModel/CarModel"));
+  const CarColor = lazy(() => import("../../pages/CarColor/CarColor"));
 
   return createBrowserRouter([
     {
@@ -27,10 +34,8 @@ export default function Routes() {
         { path: "/employee-type", element: <EmployeeTypes /> },
         { path: "/banch-expens", element: <BranchExpens /> },
         { path: "/banches", element: <Branches /> },
-        
-
-
-
+        { path: "/car-model", element: <CarModel /> },
+        { path: "/car-color", element: <CarColor /> },
       ],
     },
   ]);
