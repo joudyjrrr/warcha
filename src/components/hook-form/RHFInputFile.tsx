@@ -24,8 +24,6 @@ function RHFInputFile({
 
   ...other
 }: RHFInputFileProps) {
-
-
   const { control, setValue, watch } = useFormContext();
 
   const changeHandler = useCallback(
@@ -38,18 +36,17 @@ function RHFInputFile({
 
   const currentValue = watch(name);
 
-
   const dropHandler = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     setValue(name, file);
   };
-  //   console.log(URL.createObjectURL(currentValue))
+  console.log(currentValue);
 
   return (
-    <div className={cn("flex flex-col gap-4 mb-6 ", className)}>
+    <div className={cn("flex flex-col gap-8 mb-6 ", className)}>
       <div className=" relative text-start">
-        <Label>{label}</Label>
+        <Label className="mb-4">{label}</Label>
         <FormLabel
           htmlFor={name}
           className="absolute duration-150 left-0 opacity-5 w-full h-[calc(100%-1.5rem)] cursor-pointer"
@@ -58,7 +55,11 @@ function RHFInputFile({
           <div className="">
             {currentValue && (
               <img
-                src={URL.createObjectURL(currentValue)}
+                src={
+                  typeof currentValue === "string"
+                    ? currentValue
+                    : URL.createObjectURL(currentValue)
+                }
                 alt={currentValue.name}
                 className="w-[88px] max-h-[88px] rounded-full object-cover"
               />
@@ -74,7 +75,7 @@ function RHFInputFile({
                 onDrop={dropHandler}
               >
                 <div className="shadow-xs bg-Base-White border border-grey-200 rounded-md flex justify-center items-center p-2.5 w-10 h-10">
-                <FaCircleArrowUp className="text-2xl text-primary"/> 
+                  <FaCircleArrowUp className="text-2xl text-primary" />
                 </div>
                 <div className="flex flex-col items-center justify-center w-full">
                   <div className="flex justify-center items-center gap-1 w-full">

@@ -19,6 +19,8 @@ export default function Routes() {
   const Branches = lazy(() => import("../../pages/Branches/Branches"));
   const CarModel = lazy(() => import("../../pages/CarModel/CarModel"));
   const CarColor = lazy(() => import("../../pages/CarColor/CarColor"));
+  const CarCompany = lazy(() => import("../../pages/CarCompany/CarCompany"));
+
 
   return createBrowserRouter([
     {
@@ -35,7 +37,7 @@ export default function Routes() {
         { path: "/banch-expens", element: <BranchExpens /> },
         { path: "/banches", element: <Branches /> },
         { path: "/car-model", element: <CarModel /> },
-        { path: "/car-color", element: <CarColor /> },
+        { path: "/car-company", element: <CarCompany /> },
       ],
     },
   ]);
