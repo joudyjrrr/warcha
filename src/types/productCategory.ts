@@ -3,7 +3,9 @@ export type ProductCategoryData = {
   created_at: Date;
   updated_at: Date;
   image: {
+    id:string;
     file_name: string;
     original_url: string;
   };
+  id:string
 };

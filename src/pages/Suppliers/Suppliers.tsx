@@ -11,6 +11,8 @@ import { useState } from "react";
 import AddSupplier from "./AddSupplier";
 import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
+import DeleteModal from "@/components/DeleteModel";
 const Suppliers = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-suppliers"],
@@ -72,15 +74,22 @@ const Suppliers = () => {
       id: "actions",
       name: "التحكم",
       cell: (row) => (
-        <div
+        <div className="flex justify-center  items-center text-center cursor-pointer">
+        <Button
+        variant={"link"}
           onClick={() => {
             setModalState("edit");
             setSelectedRow(row);
           }}
-          className="flex justify-center items-center text-center cursor-pointer"
         >
-          <FiEdit className="text-gray text-lg hover:text-pretty" />
-        </div>
+          <FiEdit className="text-primary text-lg hover:text-pretty" />
+        </Button>
+        <DeleteModal
+          MassegeSuccess="تم الحذف بنجاح"
+          apiPath={apiRoutes.supplier.buttons.delete(row.id!)}
+          refetch={() => {}}
+        />
+      </div>
       ),
     },
   ];

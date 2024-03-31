@@ -11,6 +11,8 @@ import apiRoutes from "@/api";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import AddProductCategory from "./AddProductCategory";
+import { Button } from "@/components/ui/button";
+import DeleteModal from "@/components/DeleteModel";
 const ProductCategory = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-prod-cat"],
@@ -38,7 +40,7 @@ const ProductCategory = () => {
       name: "الصورة",
       cell: (row) => (
         <img
-          src={`https://warsha.htc-company.com/public/getImage/${row.image?.file_name}`}
+          src={`https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`}
         />
       ),
     },
@@ -60,15 +62,22 @@ const ProductCategory = () => {
       id: "actions",
       name: "التحكم",
       cell: (row) => (
-        <div
+        <div className="flex justify-center  items-center text-center cursor-pointer">
+        <Button
+        variant={"link"}
           onClick={() => {
             setModalState("edit");
             setSelectedRow(row);
           }}
-          className="flex justify-center items-center text-center cursor-pointer"
         >
-          <FiEdit className="text-gray text-lg hover:text-pretty" />
-        </div>
+          <FiEdit className="text-primary text-lg hover:text-pretty" />
+        </Button>
+        <DeleteModal
+          MassegeSuccess="تم الحذف بنجاح"
+          apiPath={apiRoutes.productCategory.buttons.delete(row.id!)}
+          refetch={() => {}}
+        />
+      </div>
       ),
     },
   ];
@@ -101,7 +110,7 @@ const ProductCategory = () => {
             setPaginationPage: setPaginationPage,
           },
         }}
-        breadcrumb={[{ title: "العملات" }]}
+        breadcrumb={[{ title: "انواع المنتجات" }]}
       ></PageContainer>
       {(modalState === "add" || modalState === "edit") && (
         <AddProductCategory

@@ -38,7 +38,7 @@ const DeleteModal: FC<{
         onClick={() => {
           setOpenModal(true);
         }}
-        className={`text-gray text-lg hover:text-pretty`}
+        className={`text-primary text-lg hover:text-pretty`}
       />
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogContent className="flex flex-col items-center justify-center ">

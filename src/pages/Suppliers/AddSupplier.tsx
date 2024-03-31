@@ -13,7 +13,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PerTypeValidation } from "@/hooks/validation";
 
 interface DialogContainerProps {
-  dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
   formValues?: { name: string };
@@ -55,8 +54,21 @@ const AddSupplier: React.FC<DialogContainerProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
-          <div className="flex flex-col">
+          <div className="grid grid-cols-2 gap-4">
             <RHFTextField name="name" type="text" label="اسم المزود" />
+            <RHFTextField name="phone" type="text" label="رقم التليفون" />
+            <RHFTextField name="address" type="text" label="العنوان" />
+            <RHFTextField
+              name="opening_balance"
+              type="number"
+              label="الرصيد الافتتاحي"
+              
+            />
+            <RHFTextField
+              name="currency"
+              type="text"
+              label="العملة"
+            />
           </div>
           <div className="mt-6 flex gap-4">
             <Button

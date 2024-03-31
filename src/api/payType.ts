@@ -5,7 +5,7 @@ const payType = {
   buttons: {
     add: AddPrefix(`/createPayType?`),
     update: AddPrefix(`/update`),
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deletePayType/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

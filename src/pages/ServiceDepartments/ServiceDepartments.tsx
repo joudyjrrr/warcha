@@ -14,6 +14,8 @@ import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import AddServiceDepartment from "./AddServiceDepartment";
+import { Button } from "@/components/ui/button";
+import DeleteModal from "@/components/DeleteModel";
 const ServiceDepartments = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-service-departments"],
@@ -64,15 +66,22 @@ const ServiceDepartments = () => {
       id: "actions",
       name: "التحكم",
       cell: (row) => (
-        <div
+        <div className="flex justify-center  items-center text-center cursor-pointer">
+        <Button
+        variant={"link"}
           onClick={() => {
             setModalState("edit");
             setSelectedRow(row);
           }}
-          className="flex justify-center items-center text-center cursor-pointer"
         >
-          <FiEdit className="text-gray text-lg hover:text-pretty" />
-        </div>
+          <FiEdit className="text-primary text-lg hover:text-pretty" />
+        </Button>
+        <DeleteModal
+          MassegeSuccess="تم الحذف بنجاح"
+          apiPath={apiRoutes.serviceDepartment.buttons.delete(row.id!)}
+          refetch={() => {}}
+        />
+      </div>
       ),
     },
   ];
@@ -104,7 +113,7 @@ const ServiceDepartments = () => {
           setPaginationPage: setPaginationPage,
         },
       }}
-      breadcrumb={[{ title: "المزودين" }]}
+      breadcrumb={[{ title: "انواع الخدمات" }]}
     >
       {(modalState === "add" || modalState === "edit") && (
         <AddServiceDepartment

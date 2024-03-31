@@ -11,6 +11,8 @@ import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import AddPerType from "./AddPerType";
 import { FaPlus } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import DeleteModal from "@/components/DeleteModel";
 const PayTypes = () => {
   const { data, isFetching, error } = useQuery({
     queryKey: ["get-payTypes"],
@@ -56,15 +58,22 @@ const PayTypes = () => {
       id: "actions",
       name: "التحكم",
       cell: (row) => (
-        <div
+        <div className="flex justify-center  items-center text-center cursor-pointer">
+        <Button
+        variant={"link"}
           onClick={() => {
             setModalState("edit");
             setSelectedRow(row);
           }}
-          className="flex justify-center items-center text-center cursor-pointer"
         >
           <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </div>
+        </Button>
+        <DeleteModal
+          MassegeSuccess="تم الحذف بنجاح"
+          apiPath={apiRoutes.currency.buttons.delete(row.id!)}
+          refetch={() => {}}
+        />
+      </div>
       ),
     },
   ];

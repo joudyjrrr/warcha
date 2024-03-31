@@ -60,10 +60,10 @@ function SideBar() {
               <Button
                 key={`${index}`}
                 variant={"link"}
-                className={`justify-start w-full px-6 border-b border-white hover:!text-white  text-white ${link.path === location.pathname  &&  'bg-white text-primary'}`}
+                className={`justify-start w-full px-6 border-b border-white text-md hover:!text-white  text-white ${link.path === location.pathname  &&  'bg-white text-primary'}`}
                 asChild
               >
-                <NavLink to={link.path} className={cn("text-xl")}>
+                <NavLink to={link.path} className={cn("text-md")}>
                   {link.icon}
                   {link.titleLink}
                 </NavLink>

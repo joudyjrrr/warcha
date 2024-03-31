@@ -13,3 +13,8 @@ export type ServiceDepartmentData = {
     preview_url: string;
   };
 };
+
+export type ServiceDepartmenForm = {
+  name: string;
+  description?: string;
+}
