@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { CurrencyFormData } from "@/types/currency";
 import { CurrenciesValidation } from "@/hooks/validation";
 import RHFInputFile from "@/components/hook-form/RHFInputFile";
+import RHFSwitch from "@/components/hook-form/RHFSwitch";
 
 interface DialogContainerProps {
   dialogKey?: string;
@@ -57,7 +58,7 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
     }
   }, []);
  
-
+ console.log(watch("sw"))
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -69,6 +70,7 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
               label="سعر بالدولار"
             />
             <RHFTextField name="currency" label="العملة" />
+            <RHFSwitch name="sw"/>
           </div>
           <div className="mt-6 flex basis-full  gap-4">
             <Button
