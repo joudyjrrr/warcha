@@ -90,24 +90,23 @@ const AddCarCompany: React.FC<DialogContainerProps> = ({
       });
     }
   }, []);
- const currentImg = watch("image")
+  const currentImg = watch("image");
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <RHFTextField name="name" label="الاسم" />
             <RHFTextField name="country" label="البلد" />
-            <div className="flex gap-4">
-              {(formValues && !currentImg) && (
-                <img
-                  className="w-[3rem] h-[3rem] mt-12"
-                  src={`${BASE_URL_IMG}/${formValues.image?.id}/${formValues.image?.file_name}`}
-                />
-              )}
-              <RHFInputFile name="image" label="الصورة" />
-            </div>
+            <RHFInputFile name="image" label="الصورة" />
           </div>
+          {formValues && !currentImg && (
+            <img
+              className="w-[3rem] h-[3rem] mx-auto"
+              src={`${BASE_URL_IMG}/${formValues.image?.id}/${formValues.image?.file_name}`}
+            />
+          )}
+
           <div className="mt-6 flex basis-full  gap-4">
             <Button
               disabled={isPending}

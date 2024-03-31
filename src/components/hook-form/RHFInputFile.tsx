@@ -98,9 +98,7 @@ function RHFInputFile({
                       or drag and drop
                     </span>
                   </div>
-                  <p className="text-grey-600 font-sm leadig-5 w-full flex justify-center items-center">
-                    SVG, PNG, JPG or GIF (max. 800X400px)
-                  </p>
+                 
                 </div>
                 <FormMessage />
               </FormItem>
