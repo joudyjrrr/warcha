@@ -15,22 +15,17 @@ interface RHFInputFileProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
-  aspect?: number;
-  apiPath: string;
 }
 
 function RHFInputFile({
   name,
   label,
-  aspect,
-  apiPath,
   className,
 
   ...other
 }: RHFInputFileProps) {
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [file, setFile] = useState<File | null>(null);
-  const [startSubmitting, setStartSubmitting] = useState(false);
+
+
   const { control, setValue, watch } = useFormContext();
 
   const changeHandler = useCallback(
@@ -43,12 +38,7 @@ function RHFInputFile({
 
   const currentValue = watch(name);
 
-  //   const changeHandler = (event: React.DragEvent<HTMLDivElement>) => {
-  //     event.preventDefault();
-  //     const file = event.dataTransfer.files[0];
-  //     console.log(file)
-  //     setValue(name, file);
-  //   };
+
   const dropHandler = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];

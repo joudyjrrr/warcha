@@ -69,7 +69,6 @@ const AddCurrecis: React.FC<DialogContainerProps> = ({
               label="سعر بالدولار"
             />
             <RHFTextField name="currency" label="العملة" />
-            <RHFInputFile label="img" name="img"/>
           </div>
           <div className="mt-6 flex basis-full  gap-4">
             <Button
