@@ -15,10 +15,10 @@ import { CurrencyFormData } from "@/types/currency";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
 const Currencies = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error  , refetch} = useQuery({
     queryKey: ["get-currencies"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.currency.index);
+      const { data } = await axios.get(apiRoutes.currency.index + `?paginate=25`);
       return data.data;
     },
   });
@@ -78,7 +78,7 @@ const Currencies = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.currency.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

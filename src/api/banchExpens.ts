@@ -4,7 +4,7 @@ const banchExpens = {
   index: AddPrefix(`/getBranchExpens`),
   buttons: {
     add: AddPrefix(`/createBranchExpens`),
-    update: (id: string | number) => `/updatePublicData/${id}`,
+    update: (id: string | number) => AddPrefix(`/updateBranchExpens/${id}`),
     delete: (id: string | number) => AddPrefix(`/deleteBranchExpens/${id}`),
   },
   show: (id: string) => AddPrefix(`/getBranchExpensById/${id}`),

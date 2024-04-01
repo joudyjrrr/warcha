@@ -15,7 +15,7 @@ import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
 
 const CarModel = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error , refetch } = useQuery({
     queryKey: ["get-car-model"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.CarMode.index);
@@ -63,12 +63,12 @@ const CarModel = () => {
               setSelectedRow(row);
             }}
           >
-            <FiEdit className="text-gray text-lg hover:text-pretty" />
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
           </Button>
           <DeleteModal
             MassegeSuccess="تم الحذف بنجاح"
             apiPath={apiRoutes.CarMode.buttons.delete(row.id!)}
-            refetch={() => {}}
+            refetch={refetch}
           />
         </div>
       ),

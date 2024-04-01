@@ -13,8 +13,9 @@ import { useState } from "react";
 import AddProductCategory from "./AddProductCategory";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
+import { ProductCategoryForm } from "@/types/productCategory";
 const ProductCategory = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error  , refetch} = useQuery({
     queryKey: ["get-prod-cat"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.productCategory.index);
@@ -22,7 +23,7 @@ const ProductCategory = () => {
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<ProductCategoryData>();
+  const [selectedRow, setSelectedRow] = useState<any>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
@@ -75,7 +76,7 @@ const ProductCategory = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.productCategory.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

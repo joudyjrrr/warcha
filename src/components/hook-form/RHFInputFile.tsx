@@ -44,7 +44,7 @@ function RHFInputFile({
   console.log(currentValue);
 
   return (
-    <div className={cn("flex flex-col gap-8 mb-6 ", className)}>
+    <div className={cn("flex flex-col gap-8 my-6 ", className)}>
       <div className=" relative text-start">
         <Label className="mb-4">{label}</Label>
         <FormLabel
@@ -61,7 +61,7 @@ function RHFInputFile({
                     : URL.createObjectURL(currentValue)
                 }
                 alt={currentValue.name}
-                className="w-[88px] max-h-[88px] rounded-full object-cover"
+                className="w-40 h-28 mt-6 rounded-xl object-cover"
               />
             )}
           </div>

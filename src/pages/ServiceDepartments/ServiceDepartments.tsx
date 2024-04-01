@@ -17,7 +17,7 @@ import AddServiceDepartment from "./AddServiceDepartment";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
 const ServiceDepartments = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error  , refetch} = useQuery({
     queryKey: ["get-service-departments"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.serviceDepartment.index);
@@ -79,7 +79,7 @@ const ServiceDepartments = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.serviceDepartment.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

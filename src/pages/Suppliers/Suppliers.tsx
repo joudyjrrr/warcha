@@ -13,8 +13,9 @@ import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
+import { SupplierForm } from "@/types/supplier";
 const Suppliers = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error , refetch } = useQuery({
     queryKey: ["get-suppliers"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.supplier.index);
@@ -26,7 +27,7 @@ const Suppliers = () => {
     activePage: 1,
     perPage: 20,
   });
-  const [selectedRow, setSelectedRow] = useState<SupplierData>();
+  const [selectedRow, setSelectedRow] = useState<SupplierForm>();
   const [modalState, setModalState] = useState<ModalStates>(null);
 
   const cols: TableColumn<SupplierData>[] = [
@@ -87,7 +88,7 @@ const Suppliers = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.supplier.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

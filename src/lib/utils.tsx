@@ -80,4 +80,10 @@ export const NavigationProject = [
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
   },
+  {
+    titleLink: "أنواع السيارات",
+    path: "/car-types",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
 ];

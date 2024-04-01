@@ -15,6 +15,7 @@ export type ServiceDepartmentData = {
 };
 
 export type ServiceDepartmenForm = {
+  id?:number
   name: string;
   description?: string;
 }

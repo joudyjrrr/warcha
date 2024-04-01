@@ -16,7 +16,7 @@ interface DialogContainerProps {
   dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
-  formValues?: { name: string };
+  formValues?: { name: string  , id:number};
 }
 
 const AddPerType: React.FC<DialogContainerProps> = ({
@@ -34,8 +34,23 @@ const AddPerType: React.FC<DialogContainerProps> = ({
       return res;
     },
   });
+  const { mutate :Update } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(apiRoutes.payType.buttons.update(formValues?.id!), data)
+      return res;
+    },
+  });
   const queryCliet = useQueryClient();
   const submitHandler = (data: any) => {
+    if(formValues?.id){
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل الطريقة بنجاح");
+          onClose();
+          queryCliet.refetchQueries({ queryKey: ["get-payTypes"] });
+        },
+      });
+    }
     mutate(data, {
       onSuccess() {
         toast("تمت إضافة الطريقة بنجاح");

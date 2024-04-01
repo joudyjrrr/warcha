@@ -17,7 +17,7 @@ interface DialogContainerProps {
   dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
-  formValues?: ServiceDepartmenForm
+  formValues?: ServiceDepartmenForm;
 }
 
 const AddServiceDepartment: React.FC<DialogContainerProps> = ({
@@ -31,25 +31,47 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
   const { handleSubmit, reset } = methods;
   const { mutate, isPending } = useMutation({
     mutationFn: async (data) => {
-      const res = await axios.post(apiRoutes.serviceDepartment.buttons.add, data);
+      const res = await axios.post(
+        apiRoutes.serviceDepartment.buttons.add,
+        data
+      );
+      return res;
+    },
+  });
+  const { mutate: Update } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(
+        apiRoutes.serviceDepartment.buttons.update(formValues?.id!),
+        data
+      );
       return res;
     },
   });
   const queryClient = useQueryClient();
   const submitHandler = (data: any) => {
-    mutate(data, {
-      onSuccess() {
-        toast("تمت إضافة الخدمة بنجاح");
-        onClose();
-        queryClient.refetchQueries({ queryKey: ["get-service-departments"] });
-      },
-    });
+    if (formValues?.id) {
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل الخدمة بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-service-departments"] });
+        },
+      });
+    } else {
+      mutate(data, {
+        onSuccess() {
+          toast("تمت إضافة الخدمة بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-service-departments"] });
+        },
+      });
+    }
   };
   useEffect(() => {
     if (formValues) {
       reset({
         name: formValues.name,
-        description:formValues.description
+        description: formValues.description,
       });
     }
   }, []);
@@ -60,7 +82,6 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
           <div className="flex flex-col">
             <RHFTextField name="name" type="text" label="اسم الخدمة" />
             <RHFTextField name="description" type="text" label="وصف الخدمة" />
-
           </div>
           <div className="mt-6 flex gap-4">
             <Button

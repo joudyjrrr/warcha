@@ -21,7 +21,7 @@ const BranchExpens = () => {
   const methods = useForm();
   const { watch } = methods;
   const currentBranch = watch("branch_id");
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error , refetch} = useQuery({
     queryKey: ["get-branch-exp", currentBranch],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.banchExpens.index, {
@@ -88,7 +88,7 @@ const BranchExpens = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.banchExpens.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

@@ -60,7 +60,7 @@ const AddCarCompany: React.FC<DialogContainerProps> = ({
   const queryCliet = useQueryClient();
   const submitHandler = (data: any) => {
     // console.log(data);
-    const formData = new FormData();
+    const formData = new FormData()   as any;
     formData.append("name", data.name),
       formData.append("country", data.country);
     formData.append("image", data.image);
