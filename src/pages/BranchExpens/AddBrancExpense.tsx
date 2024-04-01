@@ -7,7 +7,7 @@ import { FormProvider } from "@/components/hook-form/FormProvider";
 import RHFTextField from "@/components/hook-form/RHFTextField";
 import { Button } from "@/components/ui/button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { toast } from "sonner";
@@ -35,6 +35,15 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
     },
     // resolver: yupResolver(CurrenciesValidation),
   });
+  const { data : brnachExpens } = useQuery({
+    queryKey: ["get-branch-exp-bu-id", formValues?.id],
+    queryFn: async () => {
+      const { data } = await axios.get(apiRoutes.banchExpens.show(formValues?.id!));
+      return data.data;
+    },
+    enabled:!!formValues?.id
+  });
+  console.log(brnachExpens)
   const { handleSubmit, watch, reset, setValue } = methods;
   const { mutate, isPending } = useMutation({
     mutationFn: async (data) => {
@@ -54,17 +63,17 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
     });
   };
   useEffect(() => {
-    if (formValues) {
+    if (brnachExpens) {
       reset({
-        currency: formValues.currency,
-        branch_id: formValues.branch_id,
-        title: formValues.title,
-        description: formValues.description,
-        total_price: formValues.total_price,
-        date: new Date(formValues.created_at).toISOString().slice(0, 16),
+        currency: brnachExpens.currency,
+        branch_id: brnachExpens.branch_id,
+        title: brnachExpens.title,
+        description: brnachExpens.description,
+        total_price: brnachExpens.total_price,
+        date: new Date(brnachExpens.created_at).toISOString().slice(0, 16),
       });
     }
-  }, [watch("branch_id")]);
+  }, [brnachExpens]);
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>

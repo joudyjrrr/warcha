@@ -5,7 +5,7 @@ const suppliers = {
   buttons: {
     add: AddPrefix(`/createSupplier`),
     update: AddPrefix(`/updateSupplier`),
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deleteSupplier/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

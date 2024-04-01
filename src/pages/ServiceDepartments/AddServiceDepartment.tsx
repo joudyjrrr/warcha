@@ -11,12 +11,13 @@ import apiRoutes from "@/api";
 import { toast } from "sonner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PerTypeValidation } from "@/hooks/validation";
+import { ServiceDepartmenForm } from "@/types/serviceDepartment";
 
 interface DialogContainerProps {
   dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
-  formValues?: { name: string };
+  formValues?: ServiceDepartmenForm
 }
 
 const AddServiceDepartment: React.FC<DialogContainerProps> = ({
@@ -24,7 +25,7 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
   onClose,
   formValues,
 }) => {
-  const methods = useForm({
+  const methods = useForm<ServiceDepartmenForm>({
     resolver: yupResolver(PerTypeValidation),
   });
   const { handleSubmit, reset } = methods;
@@ -38,9 +39,9 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
   const submitHandler = (data: any) => {
     mutate(data, {
       onSuccess() {
-        toast("تمت إضافة المزود بنجاح");
+        toast("تمت إضافة الخدمة بنجاح");
         onClose();
-        queryClient.refetchQueries({ queryKey: ["get-suppliers"] });
+        queryClient.refetchQueries({ queryKey: ["get-service-departments"] });
       },
     });
   };
@@ -48,6 +49,7 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
     if (formValues) {
       reset({
         name: formValues.name,
+        description:formValues.description
       });
     }
   }, []);
@@ -56,7 +58,9 @@ const AddServiceDepartment: React.FC<DialogContainerProps> = ({
       <DialogContent>
         <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
           <div className="flex flex-col">
-            <RHFTextField name="name" type="text" label="اسم المزود" />
+            <RHFTextField name="name" type="text" label="اسم الخدمة" />
+            <RHFTextField name="description" type="text" label="وصف الخدمة" />
+
           </div>
           <div className="mt-6 flex gap-4">
             <Button

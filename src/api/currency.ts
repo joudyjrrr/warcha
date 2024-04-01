@@ -5,7 +5,7 @@ const currency = {
   buttons: {
     add: AddPrefix(`/createPublicData`),
     update: (id: string | number) => `/updatePublicData/${id}`,
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deletePublicData/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

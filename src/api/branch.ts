@@ -4,10 +4,10 @@ const branch = {
   index: AddPrefix(`/getBranch`),
   buttons: {
     add: AddPrefix(`/createBranch`),
-    update: (id: string | number) => `/updatePublicData/${id}`,
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    update: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deleteBranch/${id}`),
   },
-  show: (id: string) => AddPrefix(`/${id}`),
+  show: (id: string) => AddPrefix(`getBranchExpensById/${id}`),
 };
 
 export default branch;

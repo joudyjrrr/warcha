@@ -4,7 +4,7 @@ import Axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 import { toast } from 'react-hot-toast'
-
+export const BASE_URL_IMG = `https://warsha.htc-company.com/public/getImage`
 const axios: AxiosInstance = Axios.create({
   baseURL: "https://warsha.htc-company.com/public/api",
   headers: {

@@ -5,7 +5,7 @@ const productCategory = {
   buttons: {
     add: AddPrefix(`/createProductCategory`),
     update: AddPrefix(`/update`),
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deleteProductCategory/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

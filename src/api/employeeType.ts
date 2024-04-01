@@ -5,7 +5,7 @@ const employeeType = {
   buttons: {
     add: AddPrefix(`/createEmployeeType`),
     update: AddPrefix(`/update`),
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deleteEmployeeType/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

@@ -2,6 +2,7 @@
 
 
 export type BranchExpensData = {
+    id:string;
     currency:string;
     branch_id:string;
     title:string;
