@@ -1,0 +1,105 @@
+import React, { useEffect } from "react";
+import { Dialog } from "@/components/ui/dialog";
+import { DialogContent } from "@/components/ui/dialog";
+import { useForm } from "react-hook-form";
+import { FormProvider } from "@/components/hook-form/FormProvider";
+import RHFTextField from "@/components/hook-form/RHFTextField";
+import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "@/lib/axios";
+import apiRoutes from "@/api";
+import { toast } from "sonner";
+import { CarModelData } from "@/types/carModel";
+import { CarTypeDate } from "@/types/carType";
+
+interface DialogContainerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  formValues?: CarTypeDate;
+}
+
+const AddCars: React.FC<DialogContainerProps> = ({
+  isOpen,
+  onClose,
+  formValues,
+}) => {
+  const methods = useForm<CarTypeDate>({
+    // resolver: yupResolver(CarModelTypeValidation),
+  });
+  const { handleSubmit, reset } = methods;
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(apiRoutes.cars.buttons.add, data);
+      return res;
+    },
+  });
+  const { mutate: Update } = useMutation({
+    mutationFn: async (data: CarModelData) => {
+      const res = await axios.post(
+        apiRoutes.cars.buttons.update(formValues?.id!),
+        data
+      );
+      return res;
+    },
+  });
+  console.log(formValues);
+  const queryCliet = useQueryClient();
+  const submitHandler = (data: any) => {
+    if (formValues?.id) {
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل السيارة بنجاح");
+          onClose();
+          queryCliet.refetchQueries({ queryKey: ["get-cars"] });
+        },
+      });
+    } else {
+      mutate(data, {
+        onSuccess() {
+          toast("تمت إضافة السيارة بنجاح");
+          onClose();
+          queryCliet.refetchQueries({ queryKey: ["get-cars"] });
+        },
+      });
+    }
+  };
+  useEffect(() => {
+    if (formValues) {
+      reset({
+        gear: formValues.gear,
+        fuel: formValues.fuel,
+      });
+    }
+  }, []);
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent>
+        <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
+          <div className="flex flex-col">
+            <RHFTextField name="gear" type="text" label="المعدات" />
+            <RHFTextField name="fuel" type="text" label="الوقود" />
+          </div>
+          <div className="mt-6 flex   gap-4">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="rounded-md flex-grow"
+            >
+              {isPending ? "الرجاء الانتظار" : "إضافة"}
+            </Button>
+            <Button
+              type="button"
+              className="flex-grow"
+              variant={"cancel"}
+              onClick={() => onClose()}
+            >
+              إلغاء
+            </Button>
+          </div>
+        </FormProvider>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default AddCars;

@@ -96,7 +96,7 @@ function CarTypes() {
             setPaginationPage: setPaginationPage,
           },
         }}
-        breadcrumb={[{ title: "موديل السيارات" }]}
+        breadcrumb={[{ title: "أنواع  السيارات" }]}
         addFunction={{
           click() {
             setModalState("add");
