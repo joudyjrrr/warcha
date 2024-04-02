@@ -13,6 +13,7 @@ import { TableColumn } from "react-data-table-component";
 import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
+import AddCars from "./AddCars";
 
 function Cars() {
   const { data, isFetching, error, refetch } = useQuery({
@@ -37,6 +38,7 @@ function Cars() {
       name: "الصورة",
       cell: (row) => (
         <img
+        className="w-[60px] h-[60px] my-6"
           src={`https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`}
         />
       ),
@@ -44,12 +46,12 @@ function Cars() {
     {
       id: "name",
       name: "الاسم",
-      cell: (row) => <div title={row.name}>{row.name}</div>,
+      cell: (row) => <p  className="font-md text-md">{row.name}</p>,
     },
     {
       id: "car_company.name",
       name: "اسم الشركة",
-      cell: (row) => <div title={row.name}>{row.car_company.name}</div>,
+      cell: (row) => <div   className="font-md text-md">{row.car_company.name}</div>,
     },
     {
       id: "car_company.name",
@@ -57,18 +59,19 @@ function Cars() {
       cell: (row) => <div>{row.car_type.gear}</div>,
     },
     {
-      id: "created_at",
-      name: "تاريخ الانشاء",
-      cell: (row) => (
-        <div>{moment(row.created_at).format("YYYY/MMMM/DDDD")}</div>
-      ),
+      id: "car_company.name",
+      name: "موديل السيارة",
+      cell: (row) => <div>{row.model}</div>,
     },
     {
-      id: "updated_at",
-      name: "آخر تعديل",
-      cell: (row) => (
-        <div>{moment(row.updated_at).format("YYYY/MMMM/DDDD")}</div>
-      ),
+      id: "car_company.name",
+      name: "رقم الموتور",
+      cell: (row) => <div>{row.motor_cc}</div>,
+    },
+    {
+      id: "car_company.name",
+      name: "قوة الحصان",
+      cell: (row) => <div>{row.horsepower}</div>,
     },
     {
       id: "actions",
@@ -121,8 +124,16 @@ function Cars() {
             setPaginationPage: setPaginationPage,
           },
         }}
-        breadcrumb={[{ title: " السارات" }]}
+        breadcrumb={[{ title: " السيارات" }]}
       ></PageContainer>
+
+      {(modalState === "add" || modalState === "edit") && (
+        <AddCars
+          isOpen={modalState === "add" || modalState === "edit"}
+          onClose={() => setModalState(null)}
+          formValues={modalState === "edit" ? selectedRow : undefined}
+        />
+      )}
     </>
   );
 }

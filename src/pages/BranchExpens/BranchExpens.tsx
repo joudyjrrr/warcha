@@ -21,7 +21,7 @@ const BranchExpens = () => {
   const methods = useForm();
   const { watch } = methods;
   const currentBranch = watch("branch_id");
-  const { data, isFetching, error , refetch} = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-branch-exp", currentBranch],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.banchExpens.index, {
@@ -29,6 +29,18 @@ const BranchExpens = () => {
       });
       return data.data;
     },
+  });
+  const { data: Brances } = useQuery({
+    queryKey: ["get-select"],
+    queryFn: async () => {
+      const { data } = await axios.get(apiRoutes.branch.index);
+      return data.data;
+    },
+    select: (data) =>
+      data.data.map((data: any) => ({
+        id: data.id,
+        name: data.name,
+      })),
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedRow, setSelectedRow] = useState<BranchExpensData>();
@@ -76,21 +88,21 @@ const BranchExpens = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.banchExpens.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.banchExpens.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];
@@ -119,7 +131,7 @@ const BranchExpens = () => {
                 placeholder="اختر برانش"
                 label="البرانش"
                 name="branch_id"
-                pathApi={apiRoutes.branch.index}
+                options={Brances}
               />
             </div>
           </FormProvider>

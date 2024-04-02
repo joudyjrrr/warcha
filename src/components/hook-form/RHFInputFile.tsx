@@ -71,16 +71,14 @@ function RHFInputFile({
             name={name}
             render={({ field }) => (
               <FormItem
-                className={`gap-4 flex flex-col justify-center items-center border border-grey-200 rounded-xl p-6 w-full`}
+                className={`gap-4 flex flex-col justify-center items-center border h-[12rem] border-grey-200 rounded-xl p-6 w-full`}
                 onDrop={dropHandler}
               >
-                <div className="shadow-xs bg-Base-White border border-grey-200 rounded-md flex justify-center items-center p-2.5 w-10 h-10">
-                  <FaCircleArrowUp className="text-2xl text-primary" />
-                </div>
+              
                 <div className="flex flex-col items-center justify-center w-full">
                   <div className="flex justify-center items-center gap-1 w-full">
                     <p className="text-brand-700 flex items-center justify-center cursor-default">
-                      Click to upload{" "}
+                    Attach a personal photo
                     </p>
 
                     <FormControl>
@@ -94,9 +92,7 @@ function RHFInputFile({
                       />
                     </FormControl>
 
-                    <span className="text-grey-600 flex items-center justify-center">
-                      or drag and drop
-                    </span>
+                   
                   </div>
                  
                 </div>

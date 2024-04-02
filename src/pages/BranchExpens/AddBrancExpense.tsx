@@ -35,6 +35,18 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
     },
     // resolver: yupResolver(CurrenciesValidation),
   });
+  const { data: Brances } = useQuery({
+    queryKey: ["get-select"],
+    queryFn: async () => {
+      const { data } = await axios.get(apiRoutes.branch.index);
+      return data.data;
+    },
+    select: (data) =>
+      data.data.map((data: any) => ({
+        id: data.id,
+        name: data.name,
+      })),
+  });
   const { data: brnachExpens } = useQuery({
     queryKey: ["get-branch-exp-bu-id", formValues?.id],
     queryFn: async () => {
@@ -103,7 +115,7 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
             <RHFSelect
               label="البرانش"
               name="branch_id"
-              pathApi={apiRoutes.branch.index}
+             options={Brances}
             />
             <RHFTextField name="title" label="العنوان" />
             <RHFTextField name="description" label="الوصف" />
