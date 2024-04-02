@@ -9,8 +9,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
 import { toast } from "sonner";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { CarModelTypeValidation, PerTypeValidation } from "@/hooks/validation";
 import { CarModelData } from "@/types/carModel";
 import { CarTypeDate } from "@/types/carType";
 
