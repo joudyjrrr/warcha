@@ -1,5 +1,10 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "swiper/css/free-mode";
 import "./index.css";
 import "@/assets/style/style.min.css";
 import { RouterProvider } from "react-router-dom";

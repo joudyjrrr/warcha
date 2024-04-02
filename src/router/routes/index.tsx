@@ -23,6 +23,9 @@ export default function Routes() {
   const CarTypes = lazy(() => import("../../pages/CarTypes/CarTypes"));
 
 
+  const Products = lazy(() => import("../../pages/Products/Products"));
+  const AddProduct = lazy(() => import("../../pages/Products/Products"));
+  const ShowProduct = lazy(() => import("../../pages/Products/ShowProduct"));
 
   return createBrowserRouter([
     {
@@ -42,6 +45,10 @@ export default function Routes() {
         { path: "/car-model", element: <CarModel /> },
         { path: "/car-company", element: <CarCompany /> },
         { path: "/car-types", element: <CarTypes /> },
+        { path: "/products", element: <Products /> },
+        { path: "/products/:productId", element: <ShowProduct /> },
+        { path: "/products/add", element: <AddProduct /> },
+        { path: "/products/Edit/:id", element: <AddProduct /> },
       ],
     },
   ]);

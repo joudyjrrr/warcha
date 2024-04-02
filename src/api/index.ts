@@ -10,11 +10,7 @@ import CarMode from "./CarMode";
 import CarColor from "./CarColor";
 import carCompany from "./CarCompany";
 import carType from "./carType";
-
-
-
-
-
+import product from "./products";
 
 const apiRoutes = {
   currency,
@@ -28,7 +24,8 @@ const apiRoutes = {
   employeeType,
   banchExpens,
   branch,
-  CarMode
+  CarMode,
+  product,
 };
 
 export default apiRoutes;

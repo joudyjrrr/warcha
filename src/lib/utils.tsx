@@ -86,4 +86,10 @@ export const NavigationProject = [
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
   },
+  {
+    titleLink: "المنتجات",
+    path: "/products",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
 ];
