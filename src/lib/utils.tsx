@@ -9,6 +9,25 @@ export function cn(...inputs: ClassValue[]) {
 
 export const NavigationProject = [
   {
+    title: "الإعدادات",
+    icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
+    path:"/settings",
+    list: [
+      {
+        titleLink: "الرئيسية",
+        icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
+        path: "/",
+        query: "",
+      },
+      {
+        titleLink: "طرق الدفع",
+        path: "/pay-types",
+        icon: <MdPayment size={"1.5rem"} className="me-4" />,
+        query: "",
+      },
+    ],
+  },
+  {
     titleLink: "الرئيسية",
     icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
     path: "/",
