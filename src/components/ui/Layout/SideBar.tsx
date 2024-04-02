@@ -11,6 +11,13 @@ import {
 } from "@/components/ui/tooltip";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Logo } from "@/assets/svgs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { LayoutPanelTop } from "lucide-react";
 
 function SideBar() {
   const [expanded, setExpanded] = useState(false);
@@ -53,67 +60,75 @@ function SideBar() {
           className={cn("transition-all", { "rotate-180": expanded })}
         />
       </Button>
-      <div className="flex flex-col items-center py-8 text-gray-600">
+      <div className="flex flex-col items-center gap-1 py-8">
         {NavigationProject.map((link, index) =>
-          link.titleLink ? (
-            expanded ? (
-              <Button
-                key={`${index}`}
-                variant={"link"}
-                className={`justify-start w-full px-6 border-b border-white text-md hover:!text-white  text-white ${link.path === location.pathname  &&  'bg-white text-primary'}`}
-                asChild
+          link.list ? (
+            <Accordion
+              key={index}
+              type="single"
+              className="w-full sidebar-menu border-b border-white"
+              collapsible
+            >
+              <AccordionItem
+                value="item-1"
+                className="border-none w-full px-6 text-white"
               >
-                <NavLink to={link.path} className={cn("text-md")}>
+                <AccordionTrigger className="hover:no-underline">
+                  <div className="flex-shrink-0 flex gap-4 ">
+                    <LayoutPanelTop /> {link.title}
+                  </div>
+                </AccordionTrigger>
+                {link.list.map((linkLevel2, indexLevel2) => (
+                  <NavLink
+                    to={`${link.path + linkLevel2.path}`}
+                    key={`${index}-${indexLevel2}`}
+                  >
+                    <AccordionContent className="ps-2">
+                      {linkLevel2.titleLink}
+                    </AccordionContent>
+                  </NavLink>
+                ))}
+              </AccordionItem>
+            </Accordion>
+          ) : expanded ? (
+            <NavLink
+              to={link.path}
+              key={`${index}`}
+              className={cn("w-full rounded-b-none")}
+            >
+              {({ isActive }) => (
+                <Button
+                  variant={isActive ? "outline" : "default"}
+                  className={`justify-start !rounded-b-none w-full px-6 border-b text-md`}
+                >
                   {link.icon}
                   {link.titleLink}
-                </NavLink>
-              </Button>
-            ) : (
-              <Button
-                key={`${index}`}
-                variant={link.path === location.pathname ? "default" : "ghost"}
-                className="w-full"
-                size="icon"
-                asChild
-              >
-                <Link to={link.path}>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger className="w-full h-full text-center justify-center flex items-center">
-                        {link.icon}
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{link.titleLink}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-              </Button>
-            )
+                </Button>
+              )}
+            </NavLink>
           ) : (
-            // <Accordion
-            //   key={index}
-            //   type="single"
-            //   className="w-full sidebar-menu"
-            //   collapsible
-            // >
-            //   <AccordionItem value="item-1" className="border-none w-full px-6">
-            //     <AccordionTrigger className="hover:no-underline">
-            //       <div className="flex-shrink-0 flex gap-4">
-            //         <LayoutPanelTop /> {link.title}
-            //       </div>
-            //     </AccordionTrigger>
-            //     {link.list?.map((linkLevel2, indexLevel2) => (
-            //       <AccordionContent
-            //         key={`${index}-${indexLevel2}`}
-            //         className="ps-2"
-            //       >
-            //         {linkLevel2.titleLink}
-            //       </AccordionContent>
-            //     ))}
-            //   </AccordionItem>
-            // </Accordion>
-            <p key={index}></p>
+            <NavLink to={link.path}>
+              {({ isActive }) => (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="w-full h-full text-center justify-center flex items-center">
+                      <Button
+                        key={`${index}`}
+                        variant={isActive ? "outline" : "default"}
+                        className="w-full"
+                        size="icon"
+                        asChild
+                      >
+                        {link.icon}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{link.titleLink}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </NavLink>
           )
         )}
       </div>

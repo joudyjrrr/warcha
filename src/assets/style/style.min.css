@@ -95,8 +95,4 @@
 .rdt_Table .rdt_TableBody .rdt_TableRow {
   color: var(--body-color);
   background: inherit;
-}
-
-.sidebar-menu [data-state=open] {
-  background-color: rgb(248, 245, 245);
 }/*# sourceMappingURL=style.min.css.map */
