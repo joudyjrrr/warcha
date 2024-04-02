@@ -15,6 +15,7 @@ import {
 
 type PageContainerProps = {
   addFunction?: { children: React.ReactNode; click?: () => void };
+  addLink?: { children: React.ReactNode; to: string };
   children?: React.ReactNode;
   filterComponent?: React.ReactNode;
   table?: TableProps;
@@ -28,6 +29,7 @@ function PageContainer({
   table,
   breadcrumb,
   pageTabs,
+  addLink,
 }: PageContainerProps) {
   // const [filterState, setFilterState] = useState(false);
   const location = useLocation();
@@ -37,7 +39,7 @@ function PageContainer({
         <Breadcrumb className="border-b border-[#DBDAD] pb-4  mb-8">
           <BreadcrumbList>
             {breadcrumb.map((bread, index) => (
-              <div key={index}>
+              <div className="flex items-center gap-4" key={index}>
                 <BreadcrumbItem>
                   {bread.href ? (
                     <BreadcrumbLink
@@ -62,10 +64,14 @@ function PageContainer({
       )}
 
       <div className="mb-4 flex justify-end gap-4">
-       
         {addFunction && (
           <Button onClick={addFunction.click} variant={"default"}>
             {addFunction.children}
+          </Button>
+        )}
+        {addLink && (
+          <Button asChild={true} variant={"default"}>
+            <Link to={addLink.to}>{addLink.children}</Link>
           </Button>
         )}
       </div>
