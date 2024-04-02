@@ -20,6 +20,8 @@ export default function Routes() {
   const CarModel = lazy(() => import("../../pages/CarModel/CarModel"));
   const CarColor = lazy(() => import("../../pages/CarColor/CarColor"));
   const CarCompany = lazy(() => import("../../pages/CarCompany/CarCompany"));
+  const CarTypes = lazy(() => import("../../pages/CarTypes/CarTypes"));
+
 
 
   return createBrowserRouter([
@@ -36,8 +38,10 @@ export default function Routes() {
         { path: "/employee-type", element: <EmployeeTypes /> },
         { path: "/banch-expens", element: <BranchExpens /> },
         { path: "/banches", element: <Branches /> },
+        { path: "/car-color", element: <CarColor /> },
         { path: "/car-model", element: <CarModel /> },
         { path: "/car-company", element: <CarCompany /> },
+        { path: "/car-types", element: <CarTypes /> },
       ],
     },
   ]);

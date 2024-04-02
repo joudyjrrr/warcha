@@ -7,6 +7,7 @@ export type CurrencyData = {
   updated_at: Date;
 };
 export type CurrencyFormData = {
+  id:number;
   currency: string;
   dollar_price: number;
 };

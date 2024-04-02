@@ -4,7 +4,7 @@ const suppliers = {
   index: AddPrefix(`/getSupplier`),
   buttons: {
     add: AddPrefix(`/createSupplier`),
-    update: AddPrefix(`/updateSupplier`),
+    update: (id: string | number) => AddPrefix(`/updateSupplier/${id}`),
     delete: (id: string | number) => AddPrefix(`/deleteSupplier/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),

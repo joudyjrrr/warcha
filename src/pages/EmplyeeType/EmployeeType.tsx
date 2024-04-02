@@ -17,7 +17,7 @@ import AddServiceDepartment from "./AddEmployeeType";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
 const EmployeeType = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error , refetch } = useQuery({
     queryKey: ["get-employee-type"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.employeeType.index);
@@ -35,14 +35,8 @@ const EmployeeType = () => {
   const cols: TableColumn<ServiceDepartmentData>[] = [
     {
       id: "name",
-      name: "اسم الخدمة",
+      name: "اسم الموظف",
       cell: (row) => <div title={row.name}>{row.name}</div>,
-    },
-
-    {
-      id: "description",
-      name: "وصف الخدمة",
-      cell: (row) => <div title={row.description}>{row.description}</div>,
     },
     {
       id: "created_at",
@@ -79,7 +73,7 @@ const EmployeeType = () => {
         <DeleteModal
           MassegeSuccess="تم الحذف بنجاح"
           apiPath={apiRoutes.employeeType.buttons.delete(row.id!)}
-          refetch={() => {}}
+          refetch={refetch}
         />
       </div>
       ),

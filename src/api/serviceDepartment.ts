@@ -4,8 +4,8 @@ const serviceDepartment = {
   index: AddPrefix(`/getServiceDepartment`),
   buttons: {
     add: AddPrefix(`/createServiceDepartment`),
-    update: AddPrefix(`/update`),
-    delete: (id: string | number) => AddPrefix(`/delete/${id}`),
+    update:  (id: string | number) => AddPrefix(`/updateServiceDepartment/${id}`),
+    delete: (id: string | number) => AddPrefix(`/deleteServiceDepartment/${id}`),
   },
   show: (id: string) => AddPrefix(`/${id}`),
 };

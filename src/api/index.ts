@@ -9,6 +9,8 @@ import branch from "./branch";
 import CarMode from "./CarMode";
 import CarColor from "./CarColor";
 import carCompany from "./CarCompany";
+import carType from "./carType";
+
 
 
 
@@ -16,6 +18,7 @@ import carCompany from "./CarCompany";
 
 const apiRoutes = {
   currency,
+  carType,
   CarColor,
   payType,
   supplier,

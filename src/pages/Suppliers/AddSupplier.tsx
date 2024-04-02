@@ -11,11 +11,12 @@ import apiRoutes from "@/api";
 import { toast } from "sonner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PerTypeValidation } from "@/hooks/validation";
+import { SupplierForm } from "@/types/supplier";
 
 interface DialogContainerProps {
   isOpen: boolean;
   onClose: () => void;
-  formValues?: { name: string };
+  formValues?: SupplierForm;
 }
 
 const AddSupplier: React.FC<DialogContainerProps> = ({
@@ -23,8 +24,8 @@ const AddSupplier: React.FC<DialogContainerProps> = ({
   onClose,
   formValues,
 }) => {
-  const methods = useForm({
-    resolver: yupResolver(PerTypeValidation),
+  const methods = useForm<SupplierForm>({
+    // resolver: yupResolver(PerTypeValidation),
   });
   const { handleSubmit, reset } = methods;
   const { mutate, isPending } = useMutation({
@@ -33,20 +34,43 @@ const AddSupplier: React.FC<DialogContainerProps> = ({
       return res;
     },
   });
+  const { mutate: Update } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(
+        apiRoutes.supplier.buttons.update(formValues?.id!),
+        data
+      );
+      return res;
+    },
+  });
   const queryClient = useQueryClient();
   const submitHandler = (data: any) => {
-    mutate(data, {
-      onSuccess() {
-        toast("تمت إضافة المزود بنجاح");
-        onClose();
-        queryClient.refetchQueries({ queryKey: ["get-suppliers"] });
-      },
-    });
+    if (formValues?.id) {
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل المزود بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-suppliers"] });
+        },
+      });
+    } else {
+      mutate(data, {
+        onSuccess() {
+          toast("تمت إضافة المزود بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-suppliers"] });
+        },
+      });
+    }
   };
   useEffect(() => {
     if (formValues) {
       reset({
         name: formValues.name,
+        phone: formValues.phone,
+        address: formValues.address,
+        opening_balance: formValues.opening_balance,
+        currency: formValues.currency,
       });
     }
   }, []);
@@ -62,13 +86,8 @@ const AddSupplier: React.FC<DialogContainerProps> = ({
               name="opening_balance"
               type="number"
               label="الرصيد الافتتاحي"
-              
             />
-            <RHFTextField
-              name="currency"
-              type="text"
-              label="العملة"
-            />
+            <RHFTextField name="currency" type="text" label="العملة" />
           </div>
           <div className="mt-6 flex gap-4">
             <Button

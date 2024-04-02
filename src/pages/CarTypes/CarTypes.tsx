@@ -1,60 +1,58 @@
-import { PageContainer } from "@/components/containers";
-import { useQuery } from "@tanstack/react-query";
-import { TableColumn } from "react-data-table-component";
-import moment from "moment";
-import { ModalStates, PayTypeData } from "@/types";
-import "moment/locale/ar";
-import { FiEdit } from "react-icons/fi";
-import axios from "@/lib/axios";
 import apiRoutes from "@/api";
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
-import AddPerType from "./AddPerType";
-import { FaPlus } from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
-const PayTypes = () => {
+import { PageContainer } from "@/components/containers";
+import { Button } from "@/components/ui/button";
+import axios from "@/lib/axios";
+import { ModalStates } from "@/types";
+import { CarModelData } from "@/types/carModel";
+import { CarTypeDate } from "@/types/carType";
+import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+import React, { useState } from "react";
+import { TableColumn } from "react-data-table-component";
+import { FaPlus } from "react-icons/fa6";
+import { FiEdit } from "react-icons/fi";
+import { useSearchParams } from "react-router-dom";
+import AddCarTypes from "./AddCarTypes";
+
+function CarTypes() {
   const { data, isFetching, error, refetch } = useQuery({
-    queryKey: ["get-payTypes"],
+    queryKey: ["get-car-type"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.payType.index);
+      const { data } = await axios.get(apiRoutes.carType.index);
       return data.data;
     },
   });
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<{
-    name: string;
-    id: number;
-  }>();
+  const [selectedRow, setSelectedRow] = useState<CarTypeDate>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
   });
   const [modalState, setModalState] = useState<ModalStates>(null);
-
-  const cols: TableColumn<PayTypeData>[] = [
+  const cols: TableColumn<CarTypeDate>[] = [
     {
-      id: "name",
-      name: "اسم الطريقة ",
-      cell: (row) => <div title={row.name}>{row.name}</div>,
+      id: "gear",
+      name: "معدات",
+      cell: (row) => <div title={row.gear}>{row.gear}</div>,
     },
-
+    {
+      id: "fuel",
+      name: "الوقود",
+      cell: (row) => <div title={row.gear}>{row.fuel}</div>,
+    },
     {
       id: "created_at",
       name: "تاريخ الانشاء",
       cell: (row) => (
-        <div title={moment(row.created_at).format("YYYY/MMMM/DDDD")}>
-          {moment(row.created_at).format("YYYY/MMMM/DDDD")}
-        </div>
+        <div>{moment(row.created_at).format("YYYY/MMMM/DDDD")}</div>
       ),
     },
     {
       id: "updated_at",
       name: "آخر تعديل",
       cell: (row) => (
-        <div title={moment(row.updated_at).format("YYYY/MMMM/DDDD")}>
-          {moment(row.updated_at).format("YYYY/MMMM/DDDD")}
-        </div>
+        <div>{moment(row.updated_at).format("YYYY/MMMM/DDDD")}</div>
       ),
     },
     {
@@ -73,27 +71,17 @@ const PayTypes = () => {
           </Button>
           <DeleteModal
             MassegeSuccess="تم الحذف بنجاح"
-            apiPath={apiRoutes.currency.buttons.delete(row.id!)}
+            apiPath={apiRoutes.carType.buttons.delete(row.id!)}
             refetch={refetch}
           />
         </div>
       ),
     },
   ];
+  console.log(data);
   return (
     <>
       <PageContainer
-        addFunction={{
-          click() {
-            setModalState("add");
-          },
-          children: (
-            <>
-              <FaPlus className="text-white text-md" />
-              <p>إضافة طريقة دفع </p>
-            </>
-          ),
-        }}
         table={{
           columns: cols,
           data: data ?? [],
@@ -108,11 +96,22 @@ const PayTypes = () => {
             setPaginationPage: setPaginationPage,
           },
         }}
-        breadcrumb={[{ title: "طرق الدفع" }]}
-      ></PageContainer>
+        breadcrumb={[{ title: "موديل السيارات" }]}
+        addFunction={{
+          click() {
+            setModalState("add");
+          },
+          children: (
+            <>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة نوع سيارات </p>
+            </>
+          ),
+        }}
+      />
 
       {(modalState === "add" || modalState === "edit") && (
-        <AddPerType
+        <AddCarTypes
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}
           formValues={modalState === "edit" ? selectedRow : undefined}
@@ -120,6 +119,6 @@ const PayTypes = () => {
       )}
     </>
   );
-};
+}
 
-export default PayTypes;
+export default CarTypes;

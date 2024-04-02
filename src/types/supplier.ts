@@ -6,6 +6,7 @@ export type SupplierData = {
   money: string;
   opening_balance: string;
   created_at: Date;
+  currency:string;
   updated_at: Date;
   image: {
     id: number;
@@ -16,3 +17,12 @@ export type SupplierData = {
     preview_url: string;
   };
 };
+
+export type SupplierForm = {
+  id:number;
+  name: string;
+  phone: string;
+  address:string;
+  currency: string;
+  opening_balance: string;
+}

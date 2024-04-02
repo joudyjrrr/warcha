@@ -17,7 +17,7 @@ import { CarColorData } from "@/types/CarColor";
 import AddCarColor from "./AddCarColor";
 
 const CarColor = () => {
-  const { data, isFetching, error } = useQuery({
+  const { data, isFetching, error , refetch } = useQuery({
     queryKey: ["get-car-color"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.CarColor.index);
@@ -76,12 +76,12 @@ const CarColor = () => {
               setSelectedRow(row);
             }}
           >
-            <FiEdit className="text-gray text-lg hover:text-pretty" />
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
           </Button>
           <DeleteModal
             MassegeSuccess="تم الحذف بنجاح"
             apiPath={apiRoutes.CarColor.buttons.delete(row.id!)}
-            refetch={() => {}}
+            refetch={refetch}
           />
         </div>
       ),

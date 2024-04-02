@@ -7,5 +7,12 @@ export type ProductCategoryData = {
     file_name: string;
     original_url: string;
   };
-  id:string
+  id:number
 };
+
+
+export type ProductCategoryForm = {
+  id?:number
+  name: string;
+  image?:string
+}

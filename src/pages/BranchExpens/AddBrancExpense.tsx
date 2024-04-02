@@ -35,15 +35,17 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
     },
     // resolver: yupResolver(CurrenciesValidation),
   });
-  const { data : brnachExpens } = useQuery({
+  const { data: brnachExpens } = useQuery({
     queryKey: ["get-branch-exp-bu-id", formValues?.id],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.banchExpens.show(formValues?.id!));
+      const { data } = await axios.get(
+        apiRoutes.banchExpens.show(formValues?.id!)
+      );
       return data.data;
     },
-    enabled:!!formValues?.id
+    enabled: !!formValues?.id,
   });
-  console.log(brnachExpens)
+  console.log(brnachExpens);
   const { handleSubmit, watch, reset, setValue } = methods;
   const { mutate, isPending } = useMutation({
     mutationFn: async (data) => {
@@ -51,16 +53,35 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
       return res;
     },
   });
+  const { mutate: Update } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(
+        apiRoutes.banchExpens.buttons.update(formValues?.id!),
+        data
+      );
+      return res;
+    },
+  });
   const queryCliet = useQueryClient();
   const submitHandler = (data: any) => {
     console.log(data);
-    mutate(data, {
-      onSuccess() {
-        toast("تمت إضافة العملة بنجاح");
-        onClose();
-        queryCliet.refetchQueries({ queryKey: ["get-branch-exp"] });
-      },
-    });
+    if (brnachExpens) {
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل النفقة بنجاح");
+          onClose();
+          queryCliet.refetchQueries({ queryKey: ["get-branch-exp"] });
+        },
+      });
+    } else {
+      mutate(data, {
+        onSuccess() {
+          toast("تمت إضافة النفقة بنجاح");
+          onClose();
+          queryCliet.refetchQueries({ queryKey: ["get-branch-exp"] });
+        },
+      });
+    }
   };
   useEffect(() => {
     if (brnachExpens) {

@@ -16,7 +16,7 @@ interface DialogContainerProps {
   dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
-  formValues?: { name: string };
+  formValues?: { name: string; id: number };
 }
 
 const AddEmployeeType: React.FC<DialogContainerProps> = ({
@@ -34,15 +34,32 @@ const AddEmployeeType: React.FC<DialogContainerProps> = ({
       return res;
     },
   });
+  const { mutate: Update } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(apiRoutes.employeeType.buttons.add, data);
+      return res;
+    },
+  });
+  
   const queryClient = useQueryClient();
   const submitHandler = (data: any) => {
-    mutate(data, {
-      onSuccess() {
-        toast("تمت إضافة الموظف بنجاح");
-        onClose();
-        queryClient.refetchQueries({ queryKey: ["get-employee-type"] });
-      },
-    });
+    if (formValues?.id) {
+      Update(data, {
+        onSuccess() {
+          toast("تمت تعديل الموظف بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-employee-type"] });
+        },
+      });
+    } else {
+      mutate(data, {
+        onSuccess() {
+          toast("تمت إضافة الموظف بنجاح");
+          onClose();
+          queryClient.refetchQueries({ queryKey: ["get-employee-type"] });
+        },
+      });
+    }
   };
   useEffect(() => {
     if (formValues) {
