@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { CSSProperties, useLayoutEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import SwiperClass from "swiper/types/swiper-class";
+import { SwiperClass } from "swiper/react";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -184,7 +184,7 @@ function ShowProduct() {
           </div>
         </div>
         <div className="col-span-12 p-4 drop-shadow-lg flex items-center">
-          <Line options={options} data={data} />;
+          {/* <Line options={options} data={data} />; */}
         </div>
       </div>
     </PageContainer>
