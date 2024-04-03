@@ -41,33 +41,24 @@ const RHFSelect: React.FunctionComponent<RHFSelectProps> = ({
   isAdornment = false,
 }) => {
   const { control, watch } = useFormContext();
-  const [Name,setName] = useState<any>("")
+  const [Name, setName] = useState<any>("");
   const [Optins, setOptins] = useState(options);
-  const { data, isFetching, error } = useQuery({
-    queryKey: ["get-select"],
-    queryFn: async () => {
-      const { data } = await axios.get(pathApi!);
-      return data.data;
-    },
-    select: (data) =>
-      data.data.map((data: any) => ({
-        id: data.id,
-        name: data.name,
-      })) as SelectOptions[],
-  });
+
   const currentValue = watch(name);
   useEffect(() => {
-    if (data) {
-      setOptins(data);
+    if (currentValue) {
+      setName(Optins?.find((d) => d.id == currentValue)?.name!);
     }
-    if(currentValue){
-        setName(Optins?.find((d) => d.id == currentValue)?.name!)
-    }
-
-  }, [data , currentValue]);
+  }, [currentValue]);
 
   return (
-    <div className={cn(!isAdornment && "mb-6", "w-full flex flex-col gap-4", className)}>
+    <div
+      className={cn(
+        !isAdornment && "mb-6",
+        "w-full flex flex-col gap-4",
+        className
+      )}
+    >
       <Label className="">{label}</Label>
       <FormField
         control={control}

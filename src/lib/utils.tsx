@@ -92,6 +92,12 @@ export const NavigationProject: NavigationProjectProps[] = [
     query: "",
   },
   {
+    titleLink: "السيارات",
+    path: "/cars",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
+  {
     titleLink: "المنتجات",
     path: "/products",
     icon: <MdPayment size={"1.5rem"} className="me-4" />,

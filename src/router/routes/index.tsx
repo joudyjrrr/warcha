@@ -22,6 +22,7 @@ export default function Routes() {
   const CarColor = lazy(() => import("../../pages/CarColor/CarColor"));
   const CarCompany = lazy(() => import("../../pages/CarCompany/CarCompany"));
   const CarTypes = lazy(() => import("../../pages/CarTypes/CarTypes"));
+  const Cars = lazy(() => import("../../pages/Cars/Cars"));
   const Products = lazy(() => import("../../pages/Products/Products"));
   const AddProduct = lazy(() => import("../../pages/Products/Products"));
   const ShowProduct = lazy(() => import("../../pages/Products/ShowProduct"));
@@ -45,6 +46,7 @@ export default function Routes() {
         { path: "/car-model", element: <CarModel /> },
         { path: "/car-company", element: <CarCompany /> },
         { path: "/car-types", element: <CarTypes /> },
+        { path: "/cars", element: <Cars /> },
         { path: "/products", element: <Products /> },
         { path: "/products/:productId", element: <ShowProduct /> },
         { path: "/products/add", element: <AddProduct /> },

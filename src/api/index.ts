@@ -11,9 +11,12 @@ import CarColor from "./CarColor";
 import carCompany from "./CarCompany";
 import carType from "./carType";
 import product from "./products";
+import cars from "./cars";
+
 
 const apiRoutes = {
   currency,
+  cars,
   carType,
   CarColor,
   payType,

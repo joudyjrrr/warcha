@@ -30,6 +30,18 @@ const BranchExpens = () => {
       return data.data;
     },
   });
+  const { data: Brances } = useQuery({
+    queryKey: ["get-select"],
+    queryFn: async () => {
+      const { data } = await axios.get(apiRoutes.branch.index);
+      return data.data;
+    },
+    select: (data) =>
+      data.data.map((data: any) => ({
+        id: data.id,
+        name: data.name,
+      })),
+  });
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedRow, setSelectedRow] = useState<BranchExpensData>();
   const [paginationPage, setPaginationPage] = useState({
@@ -119,7 +131,7 @@ const BranchExpens = () => {
                 placeholder="اختر برانش"
                 label="البرانش"
                 name="branch_id"
-                pathApi={apiRoutes.branch.index}
+                options={Brances}
               />
             </div>
           </FormProvider>
