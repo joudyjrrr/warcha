@@ -14,6 +14,8 @@ import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import DeleteModal from "@/components/DeleteModel";
+import { FaPlus } from "react-icons/fa6";
+import AddBranch from "./AddBranch";
 
 const Branches = () => {
   const [selectedRow, setSelectedRow] = useState<BrnachesData>();
@@ -36,7 +38,6 @@ const Branches = () => {
     },
   });
 
-  console.log(data?.data);
   const cols: TableColumn<BrnachesData>[] = [
     {
       id: "name",
@@ -49,14 +50,19 @@ const Branches = () => {
       cell: (row) => <div>{row.branch_balance}</div>,
     },
     {
-      id: "creditor",
-      name: "الدائن",
-      cell: (row) => <div>{row.creditor}</div>,
+      id: "city",
+      name: "المدينة",
+      cell: (row) => <div>{row.city}</div>,
     },
     {
-      id: "debtor",
-      name: "المدين",
-      cell: (row) => <div>{row.debtor}</div>,
+      id: "city",
+      name: "العنوان",
+      cell: (row) => <div>{row.address}</div>,
+    },
+    {
+      id: "phone",
+      name: "رقم التليفون",
+      cell: (row) => <div>{row.phone}</div>,
     },
     {
       id: "actions",
@@ -82,7 +88,8 @@ const Branches = () => {
     },
   ];
   return (
-    <PageContainer
+  <>
+  <PageContainer
       breadcrumb={[{ title: " إدارة الفروع" }]}
       table={{
         columns: cols,
@@ -110,8 +117,28 @@ const Branches = () => {
             />
           </div>
         </FormProvider>
+        
       }
+      addFunction={{
+        click() {
+          setModalState("add");
+        },
+        children: (
+          <>
+            <FaPlus className="text-white text-md" />
+            <p>إضافة  الفروع</p>
+          </>
+        ),
+      }}
     />
+     {(modalState === "add" || modalState === "edit") && (
+        <AddBranch
+          isOpen={modalState === "add" || modalState === "edit"}
+          onClose={() => setModalState(null)}
+          formValues={modalState === "edit" ? selectedRow : undefined}
+        />
+      )}
+  </>
   );
 };
 

@@ -2,6 +2,7 @@ const AddPrefix = (url: string) => "/dashboard" + url;
 
 const branch = {
   index: AddPrefix(`/getBranch`),
+ getAdmin: AddPrefix(`/getAdmin`),
   buttons: {
     add: AddPrefix(`/createBranch`),
     update: (id: string | number) => AddPrefix(`/delete/${id}`),

@@ -18,7 +18,6 @@ import { DefaultFromDate } from "@/hooks/use-window";
 import { BranchExpensData } from "@/types/branchExpence";
 
 interface DialogContainerProps {
-  dialogKey?: string;
   isOpen: boolean;
   onClose: () => void;
   formValues?: BranchExpensData;
@@ -95,18 +94,18 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
       });
     }
   };
-  useEffect(() => {
-    if (brnachExpens) {
-      reset({
-        currency: brnachExpens.currency,
-        branch_id: brnachExpens.branch_id,
-        title: brnachExpens.title,
-        description: brnachExpens.description,
-        total_price: brnachExpens.total_price,
-        date: new Date(brnachExpens.created_at).toISOString().slice(0, 16),
-      });
-    }
-  }, [brnachExpens]);
+    useEffect(() => {
+      if (brnachExpens) {
+        reset({
+          currency: brnachExpens.currency,
+          branch_id: brnachExpens.branch_id,
+          title: brnachExpens.title,
+          description: brnachExpens.description,
+          total_price: brnachExpens.total_price,
+          date: new Date(brnachExpens.created_at).toISOString().slice(0, 16),
+        });
+      }
+    }, [brnachExpens]);
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>

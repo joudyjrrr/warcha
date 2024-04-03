@@ -36,14 +36,14 @@ const AddEmployeeType: React.FC<DialogContainerProps> = ({
   });
   const { mutate: Update } = useMutation({
     mutationFn: async (data) => {
-      const res = await axios.post(apiRoutes.employeeType.buttons.add, data);
+      const res = await axios.post(apiRoutes.employeeType.buttons.update(formValues?.id!), data);
       return res;
     },
   });
   
   const queryClient = useQueryClient();
   const submitHandler = (data: any) => {
-    if (formValues?.id) {
+    if (formValues) {
       Update(data, {
         onSuccess() {
           toast("تمت تعديل الموظف بنجاح");

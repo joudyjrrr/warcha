@@ -32,19 +32,21 @@ const ProductCategory = () => {
 
   const cols: TableColumn<ProductCategoryData>[] = [
     {
-      id: "name",
-      name: "الاسم",
-      cell: (row) => <div>{row.name}</div>,
-    },
-    {
       id: "image.file_name",
       name: "الصورة",
       cell: (row) => (
         <img
+        className="w-[60px] h-[60px] my-6"
           src={`https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`}
         />
       ),
     },
+    {
+      id: "name",
+      name: "الاسم",
+      cell: (row) => <div>{row.name}</div>,
+    },
+    
     {
       id: "created_at",
       name: "تاريخ الانشاء",
