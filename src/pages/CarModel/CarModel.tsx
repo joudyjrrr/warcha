@@ -11,11 +11,11 @@ import { FiEdit } from "react-icons/fi";
 import { PageContainer } from "@/components/containers";
 import AddCarMode from "./AddCarMode";
 import { FaPlus } from "react-icons/fa6";
-import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
+import { DeleteModal } from "@/components/dialog";
 
 const CarModel = () => {
-  const { data, isFetching, error , refetch } = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-car-model"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.CarMode.index);
@@ -57,7 +57,7 @@ const CarModel = () => {
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
           <Button
-          variant={"link"}
+            variant={"link"}
             onClick={() => {
               setModalState("edit");
               setSelectedRow(row);

@@ -1,5 +1,4 @@
 import apiRoutes from "@/api";
-import DeleteModal from "@/components/DeleteModel";
 import { PageContainer } from "@/components/containers";
 import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
@@ -14,6 +13,7 @@ import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 import AddCarTypes from "./AddCarTypes";
+import { DeleteModal } from "@/components/dialog";
 
 function CarTypes() {
   const { data, isFetching, error, refetch } = useQuery({

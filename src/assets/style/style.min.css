@@ -95,4 +95,16 @@
 .rdt_Table .rdt_TableBody .rdt_TableRow {
   color: var(--body-color);
   background: inherit;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #002b5d;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 25px;
 }/*# sourceMappingURL=style.min.css.map */

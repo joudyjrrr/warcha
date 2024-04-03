@@ -13,12 +13,14 @@ import { useState } from "react";
 import AddCurrecis from "./AddCurrency";
 import { CurrencyFormData } from "@/types/currency";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
+import {DeleteModal} from "@/components/dialog";
 const Currencies = () => {
-  const { data, isFetching, error  , refetch} = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-currencies"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.currency.index + `?paginate=25`);
+      const { data } = await axios.get(
+        apiRoutes.currency.index + `?paginate=25`
+      );
       return data.data;
     },
   });
@@ -66,21 +68,21 @@ const Currencies = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.currency.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.currency.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];

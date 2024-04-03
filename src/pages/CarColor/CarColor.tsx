@@ -11,13 +11,13 @@ import { FiEdit } from "react-icons/fi";
 import { PageContainer } from "@/components/containers";
 import { CirclePicker } from "react-color";
 import { FaPlus } from "react-icons/fa6";
-import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
 import { CarColorData } from "@/types/CarColor";
 import AddCarColor from "./AddCarColor";
+import { DeleteModal } from "@/components/dialog";
 
 const CarColor = () => {
-  const { data, isFetching, error , refetch } = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-car-color"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.CarColor.index);
@@ -117,7 +117,7 @@ const CarColor = () => {
           ),
         }}
       />
-        {(modalState === "add" || modalState === "edit") && (
+      {(modalState === "add" || modalState === "edit") && (
         <AddCarColor
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}

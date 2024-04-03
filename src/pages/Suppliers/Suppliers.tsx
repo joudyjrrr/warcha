@@ -12,10 +12,10 @@ import AddSupplier from "./AddSupplier";
 import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
+import {DeleteModal} from "@/components/dialog";
 import { SupplierForm } from "@/types/supplier";
 const Suppliers = () => {
-  const { data, isFetching, error , refetch } = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-suppliers"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.supplier.index);
@@ -76,21 +76,21 @@ const Suppliers = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.supplier.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.supplier.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];

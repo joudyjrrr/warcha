@@ -11,7 +11,7 @@ import { PayTypeData } from "./payType";
 import { SupplierData } from "./supplier";
 import { ProductCategoryData } from "./productCategory";
 import { ServiceDepartmentData } from "./serviceDepartment";
-import { ProductData } from "./product";
+import { ProductData, ProductFormValues } from "./product";
 export type TResponse<
   DataType,
   isArray extends boolean | undefined = undefined
@@ -34,4 +34,5 @@ export type {
   CurrencyFormData,
   ServiceDepartmentData,
   ProductData,
+  ProductFormValues,
 };

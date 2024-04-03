@@ -14,14 +14,14 @@ import { TableColumn } from "react-data-table-component";
 import moment from "moment";
 import { FiEdit } from "react-icons/fi";
 import { BranchExpensData } from "@/types/branchExpence";
-import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
+import { DeleteModal } from "@/components/dialog";
 
 const BranchExpens = () => {
   const methods = useForm();
   const { watch } = methods;
   const currentBranch = watch("branch_id");
-  const { data, isFetching, error , refetch} = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-branch-exp", currentBranch],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.banchExpens.index, {
@@ -76,21 +76,21 @@ const BranchExpens = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.banchExpens.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.banchExpens.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];

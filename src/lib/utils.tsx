@@ -2,43 +2,29 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { RiCoinsLine, RiHome2Line } from "react-icons/ri";
 import { MdPayment } from "react-icons/md";
+import { IconType } from "react-icons/lib";
+import { ReactNode } from "react";
+import { SettingsIcons } from "@/assets/svgs";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export const NavigationProject = [
-  {
-    title: "الإعدادات",
-    icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
-    path:"/settings",
-    list: [
-      {
-        titleLink: "الرئيسية",
-        icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
-        path: "/",
-        query: "",
-      },
-      {
-        titleLink: "طرق الدفع",
-        path: "/pay-types",
-        icon: <MdPayment size={"1.5rem"} className="me-4" />,
-        query: "",
-      },
-    ],
-  },
+type NavigationProjectProps = {
+  title?: string;
+  icon?: ReactNode;
+  path: string;
+  list?: NavigationProjectProps[];
+  titleLink?: string;
+  query?: string;
+};
+export const NavigationProject: NavigationProjectProps[] = [
   {
     titleLink: "الرئيسية",
     icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
     path: "/",
     query: "",
   },
-  {
-    titleLink: "العملات",
-    path: "/currencies",
-    icon: <RiCoinsLine size={"1.5rem"} className="me-4" />,
-    query: "",
-  },
+ 
   {
     titleLink: "طرق الدفع",
     path: "/pay-types",
@@ -110,5 +96,37 @@ export const NavigationProject = [
     path: "/products",
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
+  },
+  {
+    title: "الإعدادات",
+    icon: <SettingsIcons />,
+    path: "/settings",
+    list: [
+      {
+        titleLink: "الإشعارات",
+        path: "/notifications",
+        query: "",
+      },
+      {
+        titleLink: "الوحدات",
+        path: "/unites",
+        query: "",
+      },
+      {
+        titleLink: "الموقع",
+        path: "/locations",
+        query: "",
+      },
+      {
+        titleLink: "التقارير",
+        path: "/reports",
+        query: "",
+      },
+      {
+        titleLink: "العملات",
+        path: "/currencies",
+        query: "",
+      },
+    ],
   },
 ];

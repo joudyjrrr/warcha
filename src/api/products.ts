@@ -7,7 +7,7 @@ const product = {
     update: (id: string | number) => `/updateProduct/${id}`,
     delete: (id: string | number) => AddPrefix(`/deleteProduct/${id}`),
   },
-  show: (id: string|number) => AddPrefix(`/getProductById/${id}`),
+  show: (id: string|number) => AddPrefix(`/getProductAllDataById/${id}`),
 };
 
 export default product;
