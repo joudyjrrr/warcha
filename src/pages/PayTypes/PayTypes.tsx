@@ -12,7 +12,7 @@ import { useState } from "react";
 import AddPerType from "./AddPerType";
 import { FaPlus } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
+import {DeleteModal} from "@/components/dialog";
 const PayTypes = () => {
   const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-payTypes"],

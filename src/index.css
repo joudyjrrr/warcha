@@ -59,4 +59,17 @@
   body {
     @apply text-foreground;
   }
+  ::-webkit-scrollbar {
+    /* Customize the scrollbar width */
+    @apply w-3;
+  }
+
+  ::-webkit-scrollbar-track {
+    /* Customize the scrollbar track */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* Customize the scrollbar thumb */
+    @apply bg-primary/85 rounded-full;
+  }
 }

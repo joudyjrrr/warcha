@@ -14,8 +14,8 @@ import { TableColumn } from "react-data-table-component";
 import moment from "moment";
 import { FiEdit } from "react-icons/fi";
 import { BranchExpensData } from "@/types/branchExpence";
-import DeleteModal from "@/components/DeleteModel";
 import { Button } from "@/components/ui/button";
+import { DeleteModal } from "@/components/dialog";
 
 const BranchExpens = () => {
   const methods = useForm();

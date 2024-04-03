@@ -18,7 +18,7 @@ const Products = () => {
 
   console.log("data: ", data);
   if (isFetching) return <p>loading</p>;
-  if(error) return <p>error</p>
+  if (error) return <p>error</p>;
   return (
     <PageContainer
       addLink={{
@@ -37,7 +37,7 @@ const Products = () => {
           <Link
             to={`/products/${product.id}`}
             key={index}
-            className="p-4 bg-white rounded-md transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
+            className="p-4 bg-white rounded-xl transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
           >
             <p>{product.name}</p>
             <img
@@ -46,7 +46,7 @@ const Products = () => {
               className="w-2/3 aspect-square object-cover"
             />
             <div className="w-full">
-              <div className="flex w-full justify-between">
+              <div className="flex w-full justify-between text-xl">
                 {product.product_category.name}
                 <p>{product.price} $</p>
               </div>

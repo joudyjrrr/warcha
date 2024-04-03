@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
+import { DeleteModal } from "@/components/dialog";
 import { FaPlus } from "react-icons/fa6";
 import AddBranch from "./AddBranch";
 
@@ -69,21 +69,21 @@ const Branches = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.branch.buttons.delete(row.id!)}
-          refetch={() => {}}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.branch.buttons.delete(row.id!)}
+            refetch={() => {}}
+          />
+        </div>
       ),
     },
   ];

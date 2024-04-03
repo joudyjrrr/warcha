@@ -137,7 +137,7 @@ function ShowProduct() {
           <div className="flex justify-between w-full font-semibold items-center">
             <div>
               <div className="flex gap-4 mb-4 items-center">
-                <h2 className="text-2xl text-gray-400">{data.name}</h2>
+                <h2 className="text-3xl text-primary/90">{data.name}</h2>
                 <Badge
                   variant={data.is_active ? "default" : "destructive"}
                   className="text-white"
@@ -148,19 +148,51 @@ function ShowProduct() {
               <h3 className="text-xl">{data.product_category.name}</h3>
             </div>
             <h3 className="text-lg">
-              {moment(data.created_at).format("YYYY/MMMM/DD")}
+              {moment(data.created_at).format("YYYY/MM/DD")}
             </h3>
           </div>
           <div className="">
-            <h3 className="text-lg mb-4">الوصف</h3>
+            <h3 className="text-2xl font-semibold mb-4">الوصف</h3>
             <p className="text-lg text-gray-500">{data.description}</p>
           </div>
-          <div className="flex w-full gap-4 text-xl">
-            <p className="font-semibold">سعر البيع : </p> <p>{data.price} $</p>
+          <div className="p-4 rounded-xl shadow-md grid grid-cols-2">
+            <h2 className="font-semibold text-2xl text-primary col-span-2">
+              بيع بالقطعة
+            </h2>
+            <div className="flex gap-4 px-2 text-xl">
+              <p className="font-semibold">سعر البيع : </p>
+              <p>{data.price} $</p>
+            </div>
+            <div className="flex gap-4 px-2 text-xl">
+              <p className="font-semibold"> مقدار الحسم: </p>{" "}
+              <p>{data.price_discount} %</p>
+            </div>
           </div>
+          <div className="p-4 rounded-xl shadow-md grid gap-4 grid-cols-2">
+            <h2 className="font-semibold text-2xl text-primary col-span-2">
+              بيع بالجملة
+            </h2>
+            <div className="flex gap-4 px-2 text-xl">
+              <p className="font-semibold">سعر البيع : </p>
+              <p>{data.multiple_price} $</p>
+            </div>
+            <div className="flex gap-4 px-2 text-xl">
+              <p className="font-semibold"> مقدار الحسم: </p>
+              <p>{data.multiple_price_discount} %</p>
+            </div>
+            <div className="flex gap-4 px-2 text-xl col-span-2">
+              <p className="font-semibold"> شرط الحسم: </p>
+              <p>شراء {data.min_multiple_count} وحدة</p>
+            </div>
+          </div>
+
           <div className="flex gap-6">
             <div className="w-1/3">
               <QRCode className="w-full h-auto" value={data.bar_code} />
+            </div>
+            <div className="w-2/3">
+              <h2 className="text-2xl font-semibold">وصف QrCode</h2>
+              <p className="text-lg text-gray-500">{data.bar_code}</p>
             </div>
           </div>
           <div className="flex gap-4">

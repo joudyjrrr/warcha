@@ -2,10 +2,7 @@ import { PageContainer } from "@/components/containers";
 import { useQuery } from "@tanstack/react-query";
 import { TableColumn } from "react-data-table-component";
 import moment from "moment";
-import {
-  ModalStates,
-  ServiceDepartmentData
-} from "@/types";
+import { ModalStates, ServiceDepartmentData } from "@/types";
 import "moment/locale/ar";
 import axios from "@/lib/axios";
 import apiRoutes from "@/api";
@@ -15,9 +12,9 @@ import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import AddServiceDepartment from "./AddEmployeeType";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
+import {DeleteModal} from "@/components/dialog";
 const EmployeeType = () => {
-  const { data, isFetching, error , refetch } = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-employee-type"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.employeeType.index);
@@ -61,21 +58,21 @@ const EmployeeType = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.employeeType.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.employeeType.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];

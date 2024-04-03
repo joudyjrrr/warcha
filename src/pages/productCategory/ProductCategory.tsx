@@ -12,10 +12,9 @@ import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import AddProductCategory from "./AddProductCategory";
 import { Button } from "@/components/ui/button";
-import DeleteModal from "@/components/DeleteModel";
-import { ProductCategoryForm } from "@/types/productCategory";
+import { DeleteModal, ShowImageModel } from "@/components/dialog";
 const ProductCategory = () => {
-  const { data, isFetching, error  , refetch} = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-prod-cat"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.productCategory.index);
@@ -66,21 +65,21 @@ const ProductCategory = () => {
       name: "التحكم",
       cell: (row) => (
         <div className="flex justify-center  items-center text-center cursor-pointer">
-        <Button
-        variant={"link"}
-          onClick={() => {
-            setModalState("edit");
-            setSelectedRow(row);
-          }}
-        >
-          <FiEdit className="text-primary text-lg hover:text-pretty" />
-        </Button>
-        <DeleteModal
-          MassegeSuccess="تم الحذف بنجاح"
-          apiPath={apiRoutes.productCategory.buttons.delete(row.id!)}
-          refetch={refetch}
-        />
-      </div>
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setModalState("edit");
+              setSelectedRow(row);
+            }}
+          >
+            <FiEdit className="text-primary text-lg hover:text-pretty" />
+          </Button>
+          <DeleteModal
+            MassegeSuccess="تم الحذف بنجاح"
+            apiPath={apiRoutes.productCategory.buttons.delete(row.id!)}
+            refetch={refetch}
+          />
+        </div>
       ),
     },
   ];

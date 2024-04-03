@@ -1,5 +1,4 @@
 import apiRoutes from "@/api";
-import DeleteModal from "@/components/DeleteModel";
 import { PageContainer } from "@/components/containers";
 import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
@@ -13,9 +12,10 @@ import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 import AddCarCompany from "./AddCarCompany";
+import { DeleteModal, ShowImageModel } from "@/components/dialog";
 
 function CarCompany() {
-  const { data, isFetching, error , refetch } = useQuery({
+  const { data, isFetching, error, refetch } = useQuery({
     queryKey: ["get-car-company"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.carCompany.index);
@@ -54,8 +54,11 @@ function CarCompany() {
       id: "image.file_name",
       name: "الصورة",
       cell: (row) => (
-        <img
-          src={`https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`}
+        <ShowImageModel
+          image={{
+            url: `https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`,
+            name: row.image?.file_name,
+          }}
         />
       ),
     },
@@ -82,7 +85,8 @@ function CarCompany() {
       ),
     },
   ];
-  return<>
+  return (
+    <>
       <PageContainer
         addFunction={{
           click() {
@@ -111,14 +115,15 @@ function CarCompany() {
         }}
         breadcrumb={[{ title: "شركات السارات" }]}
       ></PageContainer>
-       {(modalState === "add" || modalState === "edit") && (
+      {(modalState === "add" || modalState === "edit") && (
         <AddCarCompany
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}
           formValues={modalState === "edit" ? selectedRow : undefined}
         />
       )}
-  </>;
+    </>
+  );
 }
 
 export default CarCompany;
