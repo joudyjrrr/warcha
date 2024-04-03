@@ -13,7 +13,7 @@ import { ProductFormValues } from "@/types";
 
 const AddProductCategory = () => {
   const methods = useForm<ProductFormValues>({
-    resolver: yupResolver(PerTypeValidation),
+    // resolver: yupResolver(PerTypeValidation),
   });
   const { handleSubmit, reset } = methods;
   const { mutate, isPending } = useMutation({
