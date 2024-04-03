@@ -21,6 +21,8 @@ export default function Routes() {
   const CarColor = lazy(() => import("../../pages/CarColor/CarColor"));
   const CarCompany = lazy(() => import("../../pages/CarCompany/CarCompany"));
   const CarTypes = lazy(() => import("../../pages/CarTypes/CarTypes"));
+  const Cars = lazy(() => import("../../pages/Cars/Cars"));
+
 
 
   const Products = lazy(() => import("../../pages/Products/Products"));
@@ -33,9 +35,9 @@ export default function Routes() {
       element: <RootLayout />,
       children: [
         { path: "/", element: <h1>hi</h1> },
-        { path: "/currencies", element: <Currencies /> },
-        { path: "/pay-types", element: <PayTypes /> },
-        { path: "/suppliers", element: <Suppliers /> },
+        { path: "settings/currencies", element: <Currencies /> },
+        { path: "settings/pay-types", element: <PayTypes /> },
+        { path: "settings/suppliers", element: <Suppliers /> },
         { path: "/product-category", element: <ProductCategory /> },
         { path: "/service-department", element: <ServiceDepartments /> },
         { path: "/employee-type", element: <EmployeeTypes /> },
@@ -45,6 +47,7 @@ export default function Routes() {
         { path: "/car-model", element: <CarModel /> },
         { path: "/car-company", element: <CarCompany /> },
         { path: "/car-types", element: <CarTypes /> },
+        { path: "/cars", element: <Cars /> },
         { path: "/products", element: <Products /> },
         { path: "/products/:productId", element: <ShowProduct /> },
         { path: "/products/add", element: <AddProduct /> },

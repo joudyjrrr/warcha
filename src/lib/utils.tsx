@@ -25,32 +25,22 @@ export const NavigationProject = [
         icon: <MdPayment size={"1.5rem"} className="me-4" />,
         query: "",
       },
+      {
+        titleLink: "العملات",
+        path: "/currencies",
+        icon: <RiCoinsLine size={"1.5rem"} className="me-4" />,
+        query: "",
+      },
+      {
+        titleLink: "المزودين",
+        path: "/suppliers",
+        icon: <MdPayment size={"1.5rem"} className="me-4" />,
+        query: "",
+      },
     ],
+    
   },
-  {
-    titleLink: "الرئيسية",
-    icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
-    path: "/",
-    query: "",
-  },
-  {
-    titleLink: "العملات",
-    path: "/currencies",
-    icon: <RiCoinsLine size={"1.5rem"} className="me-4" />,
-    query: "",
-  },
-  {
-    titleLink: "طرق الدفع",
-    path: "/pay-types",
-    icon: <MdPayment size={"1.5rem"} className="me-4" />,
-    query: "",
-  },
-  {
-    titleLink: "المزودين",
-    path: "/suppliers",
-    icon: <MdPayment size={"1.5rem"} className="me-4" />,
-    query: "",
-  },
+
   {
     titleLink: "أنواع الخدمات",
     path: "/service-department",
@@ -102,6 +92,12 @@ export const NavigationProject = [
   {
     titleLink: "أنواع السيارات",
     path: "/car-types",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
+  },
+  {
+    titleLink: "السيارات",
+    path: "/cars",
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
   },

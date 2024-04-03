@@ -4,8 +4,8 @@ import { PageContainer } from "@/components/containers";
 import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
 import { ModalStates } from "@/types";
-import { CarModelData } from "@/types/carModel";
 import { CarTypeDate } from "@/types/carType";
+import { CarsData } from "@/types/cars";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import React, { useState } from "react";
@@ -13,47 +13,65 @@ import { TableColumn } from "react-data-table-component";
 import { FaPlus } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
-import AddCarTypes from "./AddCarTypes";
+import AddCars from "./AddCars";
 
-function CarTypes() {
+function Cars() {
   const { data, isFetching, error, refetch } = useQuery({
-    queryKey: ["get-car-type"],
+    queryKey: ["get-cars"],
     queryFn: async () => {
-      const { data } = await axios.get(apiRoutes.carType.index);
+      const { data } = await axios.get(apiRoutes.cars.index);
       return data.data;
     },
   });
+
+  console.log(data);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedRow, setSelectedRow] = useState<CarTypeDate>();
+  const [selectedRow, setSelectedRow] = useState<CarsData>();
   const [paginationPage, setPaginationPage] = useState({
     activePage: 1,
     perPage: 20,
   });
   const [modalState, setModalState] = useState<ModalStates>(null);
-  const cols: TableColumn<CarTypeDate>[] = [
+  const cols: TableColumn<CarsData>[] = [
     {
-      id: "gear",
-      name: "معدات",
-      cell: (row) => <div title={row.gear}>{row.gear}</div>,
-    },
-    {
-      id: "fuel",
-      name: "الوقود",
-      cell: (row) => <div title={row.gear}>{row.fuel}</div>,
-    },
-    {
-      id: "created_at",
-      name: "تاريخ الانشاء",
+      id: "image.file_name",
+      name: "الصورة",
       cell: (row) => (
-        <div>{moment(row.created_at).format("YYYY/MMMM/DDDD")}</div>
+        <img
+        className="w-[60px] h-[60px] my-6"
+          src={`https://warsha.htc-company.com/public/getImage/${row.image?.id}/${row.image?.file_name}`}
+        />
       ),
     },
     {
-      id: "updated_at",
-      name: "آخر تعديل",
-      cell: (row) => (
-        <div>{moment(row.updated_at).format("YYYY/MMMM/DDDD")}</div>
-      ),
+      id: "name",
+      name: "الاسم",
+      cell: (row) => <p  className="font-md text-md">{row.name}</p>,
+    },
+    {
+      id: "car_company.name",
+      name: "اسم الشركة",
+      cell: (row) => <div   className="font-md text-md">{row.car_company.name}</div>,
+    },
+    {
+      id: "car_company.name",
+      name: "نوع السيارة",
+      cell: (row) => <div>{row.car_type.gear}</div>,
+    },
+    {
+      id: "car_company.name",
+      name: "موديل السيارة",
+      cell: (row) => <div>{row.model}</div>,
+    },
+    {
+      id: "car_company.name",
+      name: "رقم الموتور",
+      cell: (row) => <div>{row.motor_cc}</div>,
+    },
+    {
+      id: "car_company.name",
+      name: "قوة الحصان",
+      cell: (row) => <div>{row.horsepower}</div>,
     },
     {
       id: "actions",
@@ -71,17 +89,27 @@ function CarTypes() {
           </Button>
           <DeleteModal
             MassegeSuccess="تم الحذف بنجاح"
-            apiPath={apiRoutes.carType.buttons.delete(row.id!)}
+            apiPath={apiRoutes.cars.buttons.delete(row.id!)}
             refetch={refetch}
           />
         </div>
       ),
     },
   ];
-  console.log(data);
   return (
     <>
       <PageContainer
+        addFunction={{
+          click() {
+            setModalState("add");
+          },
+          children: (
+            <>
+              <FaPlus className="text-white text-md" />
+              <p>إضافة سيارات</p>
+            </>
+          ),
+        }}
         table={{
           columns: cols,
           data: data ?? [],
@@ -96,22 +124,11 @@ function CarTypes() {
             setPaginationPage: setPaginationPage,
           },
         }}
-        breadcrumb={[{ title: "أنواع  السيارات" }]}
-        addFunction={{
-          click() {
-            setModalState("add");
-          },
-          children: (
-            <>
-              <FaPlus className="text-white text-md" />
-              <p>إضافة نوع سيارات </p>
-            </>
-          ),
-        }}
-      />
+        breadcrumb={[{ title: " السيارات" }]}
+      ></PageContainer>
 
       {(modalState === "add" || modalState === "edit") && (
-        <AddCarTypes
+        <AddCars
           isOpen={modalState === "add" || modalState === "edit"}
           onClose={() => setModalState(null)}
           formValues={modalState === "edit" ? selectedRow : undefined}
@@ -121,4 +138,4 @@ function CarTypes() {
   );
 }
 
-export default CarTypes;
+export default Cars;
