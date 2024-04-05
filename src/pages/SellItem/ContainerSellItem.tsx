@@ -1,5 +1,6 @@
 import apiRoutes from "@/api";
 import { FormProvider } from "@/components/hook-form/FormProvider";
+import RHFRadioGroup from "@/components/hook-form/RHFRadioGroup";
 import RHFSelect from "@/components/hook-form/RHFSelect";
 import RHFTextField from "@/components/hook-form/RHFTextField";
 import { Table } from "@/components/ui/Layout";
@@ -12,6 +13,11 @@ import { TableColumn } from "react-data-table-component";
 import { useForm } from "react-hook-form";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import orderImg from "../../assets/svgs/image 56.svg";
+import delvrryImg from "../../assets/svgs/image 56(1).svg";
+import DeliveryInfo from "./DeliveryInfo";
+import CouponCode from "./CouponCode";
+import CompleteOrder from "./CompleteOrder";
 
 const ContainerSellItem: FC<{
   setSelectedProducts: (arg: ProductData[]) => void;
@@ -38,8 +44,8 @@ const ContainerSellItem: FC<{
     },
     select: (data) =>
       data.data.map((d: any) => ({
-        id: d.customer_id,
-        name: d.name,
+        id: d.id,
+        name: d.currency,
       })),
   });
   const { data: Branches } = useQuery({
@@ -113,19 +119,19 @@ const ContainerSellItem: FC<{
       id: "quantity",
       name: "الكمية",
       cell: (row) => (
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 items-center">
           <Button
             variant={"link"}
             onClick={() => handleQuantityChange(row, "decrease")}
           >
-            <CiCircleMinus className="text-primary text-xl" />
+            <CiCircleMinus className="text-primary text-2xl" />
           </Button>
           <span className="p-2 w-[35px]">{row.quantity}</span>
           <Button
             variant={"link"}
             onClick={() => handleQuantityChange(row, "increase")}
           >
-            <CiCirclePlus className="text-primary text-xl" />
+            <CiCirclePlus className="text-primary text-2xl" />
           </Button>
         </div>
       ),
@@ -148,8 +154,13 @@ const ContainerSellItem: FC<{
       return res;
     },
   });
+  const [selectedCode, setSelectedCode] = useState<any>(null); // حالة المتغير المحدد
+
   const methods = useForm();
   const { handleSubmit, watch, reset, setValue } = methods;
+  const [openComplete, setOpenComplete] = useState(false);
+  const [openDelvery, setOpenDelevry] = useState(false);
+  const [openCouponCode, setOpenCouponCode] = useState(false);
   const submitHandler = (data: any) => {
     const buy_info = selectedProducts.map((product) => {
       const { id, price, quantity } = product;
@@ -163,27 +174,64 @@ const ContainerSellItem: FC<{
     };
     mutate(itemInfo);
   };
+  // console.log(selectedCode)
   return (
-    <div className="p-4 bg-white rounded-xl transition-all drop-shadow-lg flex flex-col gap-4">
+    <div className="p-4 bg-white rounded-xl transition-all drop-shadow-lg flex flex-col gap-4 w-[470px]">
       <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
           <RHFSelect
             name="inormation[customer_id]"
             options={Customer}
             label="اختر زبون"
           />
+          <RHFRadioGroup
+            onChange={(value) => value == "delivery" && setOpenDelevry(true)}
+            label="نوع الطلبية"
+            withoutIcon
+            name="order_typr"
+            options={[
+              { id: "store", name: "Store", icon: <img src={orderImg} /> },
+              {
+                id: "delivery",
+                name: "Delivery",
+                icon: <img src={delvrryImg} />,
+              },
+            ]}
+          />
           <RHFSelect name="branch_id" options={Branches} label="اختر فرع" />
           <Table
+            width="420px"
             table={{
               columns: cols,
               data: selectedProducts,
             }}
           />
-          <h1 className="font-md text-lg"> السعر النهائي : {totalPrice}</h1>
+          <Button
+            className="bg-white border border-primary text-primary font-md text-lg hover:text-white"
+            onClick={() => setOpenCouponCode(true)}
+          >
+            اضافة كوبون
+          </Button>
+          <div className="flex justify-between">
+            <div className="flex flex-col">
+              <span>price items: 127.00$</span>
+              <span>Coupon discount: 127.00$</span>
+            </div>
+            <div className="flex flex-col">
+              <span>tax: 127.00$</span>
+              <span>Additional discount: 00</span>
+            </div>
+          </div>
+          <h1 className="font-md text-lg"> Total: {totalPrice}</h1>
           <RHFSelect
             name="information[pay_type_id]"
             options={Paytypes}
             label="اختر طريقة دفع"
+          />
+          <RHFSelect
+            name="information[Currency]"
+            options={Currency}
+            label="اختر عملة"
           />
           {/* <RHFTextField name="information[currency]"/> */}
           <div className="mt-6 flex basis-full  gap-4">
@@ -191,12 +239,21 @@ const ContainerSellItem: FC<{
               disabled={isPending}
               type="submit"
               className="rounded-md flex-grow"
+              onClick={() => setOpenComplete(true)}
             >
-              {isPending ? "الرجاء الانتظار" : "إضافة"}
+              {isPending ? "الرجاء الانتظار" : "اكمال الطلب"}
             </Button>
           </div>
         </div>
       </FormProvider>
+      <DeliveryInfo setOpen={setOpenDelevry} open={openDelvery} />
+      <CouponCode
+        selectedRow={selectedCode}
+        setSelectedRow={setSelectedCode}
+        open={openCouponCode}
+        setOpen={setOpenCouponCode}
+      />
+      <CompleteOrder open={openComplete} setOpen={setOpenComplete} />
     </div>
   );
 };

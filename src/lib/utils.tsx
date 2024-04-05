@@ -115,7 +115,7 @@ export const NavigationProject: NavigationProjectProps[] = [
       },
       {
         titleLink: "الوحدات",
-        path: "/unites",
+        path: "/units",
         query: "",
       },
       {

@@ -9,9 +9,11 @@ import { TableProps } from "@/types";
 import { Loader2 } from "lucide-react";
 type DataTableProps = {
   table: TableProps;
+  width?: string;
+  border?:string;
   [props: string]: unknown;
 };
-const Table = ({ table, ...props }: DataTableProps) => {
+const Table = ({ table, width,border, ...props }: DataTableProps) => {
   return (
     <DataTable
       noHeader
@@ -36,6 +38,7 @@ const Table = ({ table, ...props }: DataTableProps) => {
         table: {
           style: {
             background: "#fff",
+            width: width,
           },
         },
         headCells: {
@@ -56,6 +59,7 @@ const Table = ({ table, ...props }: DataTableProps) => {
             justifyContent: "center",
           },
         },
+       
       }}
       progressPending={table.loading}
       noDataComponent={

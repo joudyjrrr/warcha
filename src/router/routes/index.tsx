@@ -5,7 +5,9 @@ import ServiceDepartments from "@/pages/ServiceDepartments/ServiceDepartments";
 
 export default function Routes() {
   const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
+  // const Units = lazy(() => import("../../pages/Units/Units"));
   const Units = lazy(() => import("../../pages/Units/Units"));
+
   const ShowUnit = lazy(() => import("../../pages/Units/ShowUnit"));
   const PayTypes = lazy(() => import("../../pages/PayTypes/PayTypes"));
   const Suppliers = lazy(() => import("../../pages/Suppliers/Suppliers"));
@@ -28,6 +30,7 @@ export default function Routes() {
   const AddProduct = lazy(() => import("../../pages/Products/Products"));
   const ShowProduct = lazy(() => import("../../pages/Products/ShowProduct"));
   const SelItem = lazy(() => import("../../pages/SellItem/SelItem"));
+
 
 
   return createBrowserRouter([

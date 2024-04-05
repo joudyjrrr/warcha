@@ -9,14 +9,17 @@ import { FormProvider } from "@/components/hook-form/FormProvider";
 import RHFTextField from "@/components/hook-form/RHFTextField";
 import { IoIosSearch } from "react-icons/io";
 import { useForm } from "react-hook-form";
+import ModalDetails from "./ModalDetails";
 function SelItem() {
   const methods = useForm();
   const { watch } = methods;
   const name = watch("name");
   const [selectedProducts, setSelectedProducts] = useState<ProductData[]>([]);
+  const [selectedProduc, setSelectedProduc] = useState<ProductData>();
+  const [open, setOpen] = useState<boolean>();
 
-  const { data, } = useQuery({
-    queryKey: ["get-products",name],
+  const { data } = useQuery({
+    queryKey: ["get-products", name],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.product.index, {
         params: { name },
@@ -25,13 +28,14 @@ function SelItem() {
     },
   });
 
-
   const handleProductSelect = (product: ProductData) => {
     if (selectedProducts.includes(product)) {
       setSelectedProducts(selectedProducts.filter((p) => p !== product));
     } else {
       setSelectedProducts([...selectedProducts, { ...product, quantity: 1 }]);
     }
+    setSelectedProduc({ ...product, quantity: 1 });
+    setOpen(true);
   };
 
   return (
@@ -52,28 +56,33 @@ function SelItem() {
           </FormProvider>
         }
       >
-        <div className="flex gap-8">
+        <div className="flex items-start gap-8">
           <div
-            className={`grid grid-cols-3  gap-7 ${
-              selectedProducts.length > 0 && "!grid-cols-2"
+            className={`grid grid-cols-5  gap-4 ${
+              selectedProducts.length > 0 && "!grid-cols-3"
             }`}
           >
             {data?.data.map((product: ProductData, index: number) => (
               <div
-                onClick={() => handleProductSelect(product)}
+                onClick={() => {
+                  setSelectedProduc({ ...product, quantity: 1 });
+                  setOpen(true);
+                }}
                 key={index}
-                className="p-4 bg-white rounded-xl cursor-pointer transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
+                className="p-4 bg-white h-fit rounded-xl cursor-pointer transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
               >
-                <p>{product.name}</p>
+                <p className="text-md">{product.name}</p>
                 <img
                   src={`https://warsha.htc-company.com/public/getImage/${product.main_image.id}/${product.main_image.file_name}`}
                   alt={product.main_image.file_name}
-                  className="w-2/3 aspect-square object-cover"
+                  className="w-[60px] aspect-square h-[60px]  object-cover"
                 />
                 <div className="w-full">
                   <div className="flex w-full justify-between text-xl">
-                    {product.product_category.name}
-                    <p>{product.price} $</p>
+                    <span className="text-lg">
+                      {product.product_category.name}
+                    </span>
+                    <p className="text-lg">{product.price} $</p>
                   </div>
                 </div>
               </div>
@@ -86,6 +95,14 @@ function SelItem() {
             />
           )}
         </div>
+        <ModalDetails
+          selectedProducts={selectedProducts}
+          setSelectedProduc={setSelectedProduc}
+          setSelectedProducts={setSelectedProducts}
+          Product={selectedProduc!}
+          open={open!}
+          setOpen={setOpen}
+        />
       </PageContainer>
     </>
   );

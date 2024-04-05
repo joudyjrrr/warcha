@@ -25,7 +25,7 @@ interface RHFSelectProps {
   classNameValue?: string;
   children?: React.ReactNode;
   onValueChange?: (newVaule: string) => void;
-  options?: { name: string | ReactNode; id: string }[];
+  options?: { name: string ; id: string }[];
   pathApi?: string;
 }
 
@@ -84,7 +84,11 @@ const RHFSelect: React.FunctionComponent<RHFSelectProps> = ({
               </FormControl>
               <SelectContent className="text-black">
                 {options?.map((op) => (
-                  <SelectItem key={op.id} value={op.id} className="text-black">
+                  <SelectItem
+                    key={op.id}
+                    value={label === "اختر عملة" ? op.name : op.id}
+                    className="text-black"
+                  >
                     {op.name}
                   </SelectItem>
                 ))}
