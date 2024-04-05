@@ -12,6 +12,7 @@ import { SupplierData } from "./supplier";
 import { ProductCategoryData } from "./productCategory";
 import { ServiceDepartmentData } from "./serviceDepartment";
 import { ProductData, ProductFormValues } from "./product";
+import { UnitData, UnitFormValues } from "./unit";
 export type TResponse<
   DataType,
   isArray extends boolean | undefined = undefined

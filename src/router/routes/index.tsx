@@ -6,6 +6,7 @@ import ServiceDepartments from "@/pages/ServiceDepartments/ServiceDepartments";
 export default function Routes() {
   const Currencies = lazy(() => import("../../pages/Currencies/Currencies"));
   const Units = lazy(() => import("../../pages/Units/Units"));
+  const ShowUnit = lazy(() => import("../../pages/Units/ShowUnit"));
   const PayTypes = lazy(() => import("../../pages/PayTypes/PayTypes"));
   const Suppliers = lazy(() => import("../../pages/Suppliers/Suppliers"));
   const ProductCategory = lazy(
@@ -34,7 +35,8 @@ export default function Routes() {
       children: [
         { path: "/", element: <h1>hi</h1> },
         { path: "/settings/currencies", element: <Currencies /> },
-        { path: "/settings/unites", element: <Units /> },
+        { path: "/settings/units", element: <Units /> },
+        { path: "/settings/units/:unitId", element: <ShowUnit /> },
         { path: "/pay-types", element: <PayTypes /> },
         { path: "/suppliers", element: <Suppliers /> },
         { path: "/product-category", element: <ProductCategory /> },
