@@ -62,6 +62,7 @@ function PageContainer({
           </BreadcrumbList>
         </Breadcrumb>
       )}
+         {filterComponent}
 
       <div className="mb-4 flex justify-end gap-4">
         {addFunction && (
@@ -76,7 +77,7 @@ function PageContainer({
         )}
       </div>
 
-      {filterComponent}
+   
       {pageTabs && (
         <div className="bg-secondary-500/10 mb-4 flex w-full overflow-hidden rounded-t-md border-b">
           {pageTabs.map((page, index) => (

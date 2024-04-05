@@ -5,6 +5,7 @@ export type ProductData = {
   price: number;
   is_active: number;
   product_category_id: number;
+  quantity:number
   product_category: {
     id: number;
     name: string;

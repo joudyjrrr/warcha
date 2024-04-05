@@ -42,12 +42,11 @@ const RHFSelect: React.FunctionComponent<RHFSelectProps> = ({
 }) => {
   const { control, watch } = useFormContext();
   const [Name, setName] = useState<any>("");
-  const [Optins, setOptins] = useState(options);
 
   const currentValue = watch(name);
   useEffect(() => {
     if (currentValue) {
-      setName(Optins?.find((d) => d.id == currentValue)?.name!);
+      setName(options?.find((d) => d.id == currentValue)?.name!);
     }
   }, [currentValue]);
 
@@ -84,7 +83,7 @@ const RHFSelect: React.FunctionComponent<RHFSelectProps> = ({
                 </SelectTrigger>
               </FormControl>
               <SelectContent className="text-black">
-                {Optins?.map((op) => (
+                {options?.map((op) => (
                   <SelectItem key={op.id} value={op.id} className="text-black">
                     {op.name}
                   </SelectItem>

@@ -12,10 +12,16 @@ import carCompany from "./CarCompany";
 import carType from "./carType";
 import product from "./products";
 import cars from "./cars";
+import customer from "./customer";
+import sellItem from "./sellItem";
+
+
 
 
 const apiRoutes = {
   currency,
+  sellItem,
+  customer,
   cars,
   carType,
   CarColor,

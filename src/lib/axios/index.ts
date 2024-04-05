@@ -6,7 +6,7 @@ import Axios, {
 import { toast } from 'react-hot-toast'
 export const BASE_URL_IMG = `https://warsha.htc-company.com/public/getImage`
 const axios: AxiosInstance = Axios.create({
-  baseURL: "https://warsha.htc-company.com/public/api",
+  baseURL: "https://warsha-v2.htc-company.com/public/api",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

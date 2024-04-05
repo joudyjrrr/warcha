@@ -15,7 +15,7 @@ export type StyleTypes = "fill" | "outline";
 export type ModalStates = "delete" | "add" | "edit" | "show" | "toggle" | null;
 
 export type TableProps<T = any> = {
-  paginationProps: {
+  paginationProps?: {
     paginationPage: { activePage: number | string; perPage: number | string };
     paginationTotal: number;
     setPaginationPage: React.Dispatch<
@@ -23,8 +23,8 @@ export type TableProps<T = any> = {
     >;
   };
   // setRefresh: React.Dispatch<React.SetStateAction<boolean>>
-  loading: boolean;
-  error: any;
+  loading?: boolean;
+  error?: any;
   data: T[];
   columns: TableColumn<T>[];
   setSortColumn?: React.Dispatch<React.SetStateAction<any>>;

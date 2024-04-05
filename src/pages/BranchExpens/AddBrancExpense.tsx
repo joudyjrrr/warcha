@@ -122,14 +122,14 @@ const AddBrancExpense: React.FC<DialogContainerProps> = ({
             <RHFTextField name="date" type="datetime-local" label="التاريخ" />
             <RHFTextField name="total_price" label="السعر الاجمالي" />
           </div>
-          <div className="mt-6 flex basis-full  gap-4">
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="rounded-md flex-grow"
-            >
-              {isPending ? "الرجاء الانتظار" : "إضافة"}
-            </Button>
+            <div className="mt-6 flex basis-full  gap-4">
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="rounded-md flex-grow"
+              >
+                {isPending ? "الرجاء الانتظار" : "إضافة"}
+              </Button>
             <Button
               type="button"
               variant={"cancel"}

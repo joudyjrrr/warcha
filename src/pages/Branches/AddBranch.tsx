@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import SelectLocation from "./SelectLocation";
 import { BrnacheForm, BrnachesData } from "@/types/branches";
+import RHFSwitch from "@/components/hook-form/RHFSwitch";
+import { Label } from "@/components/ui/label";
 interface DialogContainerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -21,7 +23,7 @@ interface DialogContainerProps {
 }
 function AddBranch({ isOpen, onClose, formValues }: DialogContainerProps) {
   const { data: Admin } = useQuery({
-    queryKey: ["get-branch-admin"],
+    queryKey: ["get-admin"],
     queryFn: async () => {
       const { data } = await axios.get(apiRoutes.branch.getAdmin);
       return data;
@@ -100,6 +102,14 @@ function AddBranch({ isOpen, onClose, formValues }: DialogContainerProps) {
             <RHFTextField name="address" label="العنوان" />
             <RHFTextField name="city" label="المدينة" />
             <RHFTextField name="email" label="الايميل" />
+            <div className="flex flex-col gap-4">
+              <Label>هل هو فرع رئيسي</Label>
+              <RHFSwitch name="is_main" />
+            </div>
+            <div className="flex flex-col gap-4">
+              <Label>هل هو فعال </Label>
+              <RHFSwitch name="is_active" />
+            </div>
             {!watch("latitude") && !watch("longitude") ? (
               <SelectLocation setValue={setValue} />
             ) : (

@@ -134,5 +134,12 @@ export const NavigationProject: NavigationProjectProps[] = [
         query: "",
       },
     ],
+    
+  },
+  {
+    titleLink: "المبيعات",
+    path: "/sell-item",
+    icon: <MdPayment size={"1.5rem"} className="me-4" />,
+    query: "",
   },
 ];

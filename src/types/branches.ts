@@ -18,6 +18,8 @@ export type BrnachesData = {
 export type BrnacheForm = {
     admin_id:string;
     branch_balance:number;
+    is_main:boolean;
+    is_active:boolean;
     city:string;
     address:string;
     phone:string;

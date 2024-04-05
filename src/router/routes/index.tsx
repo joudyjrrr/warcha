@@ -26,6 +26,8 @@ export default function Routes() {
   const Products = lazy(() => import("../../pages/Products/Products"));
   const AddProduct = lazy(() => import("../../pages/Products/Products"));
   const ShowProduct = lazy(() => import("../../pages/Products/ShowProduct"));
+  const SelItem = lazy(() => import("../../pages/SellItem/SelItem"));
+
 
   return createBrowserRouter([
     {
@@ -51,6 +53,8 @@ export default function Routes() {
         { path: "/products/:productId", element: <ShowProduct /> },
         { path: "/products/add", element: <AddProduct /> },
         { path: "/products/Edit/:id", element: <AddProduct /> },
+        { path: "/sell-item", element: <SelItem /> },
+
       ],
     },
   ]);
