@@ -17,6 +17,8 @@ import sellItem from "./sellItem";
 
 
 
+import units from "./unit";
+import workShops from "./workShops";
 
 const apiRoutes = {
   currency,
@@ -35,6 +37,8 @@ const apiRoutes = {
   branch,
   CarMode,
   product,
+  units,
+  workShops,
 };
 
 export default apiRoutes;
