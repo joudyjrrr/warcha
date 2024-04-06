@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { ProductData } from "@/types";
 import React, { FC } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
@@ -61,9 +62,17 @@ const ModalDetails: FC<{
             >
               <CiCircleMinus className="text-primary text-2xl" />
             </Button>
-            <span className="p-2 w-[35px]">
-              <span className="p-2 w-[35px]">{Product?.quantity}</span>{" "}
-            </span>{" "}
+              <Input
+                className="p-4 w-10 h-10"
+                value={Product?.quantity}
+                onChange={(e) =>
+                  setSelectedProduc({
+                    ...Product,
+                    quantity: parseInt(e.target.value),
+                  })
+                }
+              />{" "}
+           
             <Button
               variant={"link"}
               onClick={() => handleQuantityChange("increase")}
@@ -84,7 +93,7 @@ const ModalDetails: FC<{
             />
           </div>
         </div>
-        <Button onClick={()=>handleProductSelect()}>اضافة المنتج</Button>
+        <Button onClick={() => handleProductSelect()}>اضافة المنتج</Button>
       </DialogContent>
     </Dialog>
   );

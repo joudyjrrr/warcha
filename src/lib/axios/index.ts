@@ -15,9 +15,7 @@ const axios: AxiosInstance = Axios.create({
 
 axios.interceptors.request.use(
   (request: InternalAxiosRequestConfig) => {
-    //todo const TOKEN: string | null = localStorage?.getItem("token") || null;
-    // const TOKEN = 'MTExNjYyMjM6NjAtZGF5ZnJlZXRyaWFs'
-    // request.headers['Authorization'] = `Basic MTExNjYyMjM6NjAtZGF5ZnJlZXRyaWFs`
+    
     return request
   },
   (error) => {
@@ -43,7 +41,7 @@ axios.interceptors.response.use(
       //403
       toast.error('Accessing this data is forbidden')
       localStorage.setItem('token', '')
-      if (typeof window !== 'undefined') window.location.replace('/home')
+      // if (typeof window !== 'undefined') window.location.replace('/')
     } else if (+error?.response?.status === 500) {
       //500
       toast.error(error?.response?.data?.message)

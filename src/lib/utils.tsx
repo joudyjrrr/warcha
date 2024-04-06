@@ -19,12 +19,29 @@ type NavigationProjectProps = {
 };
 export const NavigationProject: NavigationProjectProps[] = [
   {
+    title: "البيع السريع",
+    path: "/bos",
+    icon: <SettingsIcons />,
+    list: [
+      {
+        titleLink: "مبيعات جديدة",
+        path: "/sell-item",
+        query: "",
+      },
+      {
+        titleLink: "طلبات جديدة",
+        path: "/sales-orders",
+        query: "",
+      },
+    ],
+  },
+  {
     titleLink: "الرئيسية",
     icon: <RiHome2Line size={"1.5rem"} className="me-4" />,
     path: "/",
     query: "",
   },
- 
+
   {
     titleLink: "طرق الدفع",
     path: "/pay-types",
@@ -103,6 +120,7 @@ export const NavigationProject: NavigationProjectProps[] = [
     icon: <MdPayment size={"1.5rem"} className="me-4" />,
     query: "",
   },
+  
   {
     title: "الإعدادات",
     icon: <SettingsIcons />,
@@ -134,12 +152,5 @@ export const NavigationProject: NavigationProjectProps[] = [
         query: "",
       },
     ],
-    
-  },
-  {
-    titleLink: "المبيعات",
-    path: "/sell-item",
-    icon: <MdPayment size={"1.5rem"} className="me-4" />,
-    query: "",
   },
 ];

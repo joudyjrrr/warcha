@@ -28,20 +28,12 @@ function SelItem() {
     },
   });
 
-  const handleProductSelect = (product: ProductData) => {
-    if (selectedProducts.includes(product)) {
-      setSelectedProducts(selectedProducts.filter((p) => p !== product));
-    } else {
-      setSelectedProducts([...selectedProducts, { ...product, quantity: 1 }]);
-    }
-    setSelectedProduc({ ...product, quantity: 1 });
-    setOpen(true);
-  };
+
 
   return (
     <>
       <PageContainer
-        breadcrumb={[{ title: "المبيعات" }]}
+        breadcrumb={[{ title: " مبيعات جديدة" }]}
         filterComponent={
           <FormProvider onSubmit={() => {}} methods={methods}>
             <div className="w-[20rem]">
@@ -58,7 +50,7 @@ function SelItem() {
       >
         <div className="flex items-start gap-8">
           <div
-            className={`grid grid-cols-5  gap-4 ${
+            className={`grid grid-cols-3  gap-4 ${
               selectedProducts.length > 0 && "!grid-cols-3"
             }`}
           >
@@ -88,12 +80,10 @@ function SelItem() {
               </div>
             ))}
           </div>
-          {selectedProducts.length > 0 && (
-            <ContainerSellItem
+          <ContainerSellItem
               selectedProducts={selectedProducts}
               setSelectedProducts={setSelectedProducts}
             />
-          )}
         </div>
         <ModalDetails
           selectedProducts={selectedProducts}

@@ -18,12 +18,13 @@ import delvrryImg from "../../assets/svgs/image 56(1).svg";
 import DeliveryInfo from "./DeliveryInfo";
 import CouponCode from "./CouponCode";
 import CompleteOrder from "./CompleteOrder";
+import { Input } from "@/components/ui/input";
 
 const ContainerSellItem: FC<{
   setSelectedProducts: (arg: ProductData[]) => void;
   selectedProducts: ProductData[];
 }> = ({ selectedProducts, setSelectedProducts }) => {
-  const [totalPrice, setTotalPrice] = useState(selectedProducts[0].price);
+  const [totalPrice, setTotalPrice] = useState(selectedProducts[0]?.price);
   const { data: Customer } = useQuery({
     queryKey: ["get-customer"],
     queryFn: async () => {
@@ -73,7 +74,7 @@ const ContainerSellItem: FC<{
       })),
   });
 
-  const handleQuantityChange = (product: ProductData, action: string) => {
+  const handleQuantityChange = (product: ProductData, action: any) => {
     const updatedProducts = [...selectedProducts];
     const selectedProductIndex = updatedProducts.findIndex(
       (p) => p.id === product.id
@@ -85,6 +86,8 @@ const ContainerSellItem: FC<{
       if (updatedProducts[selectedProductIndex].quantity > 0) {
         updatedProducts[selectedProductIndex].quantity -= 1;
       }
+    } else {
+      updatedProducts[selectedProductIndex].quantity = action;
     }
 
     setSelectedProducts(updatedProducts);
@@ -126,7 +129,14 @@ const ContainerSellItem: FC<{
           >
             <CiCircleMinus className="text-primary text-2xl" />
           </Button>
-          <span className="p-2 w-[35px]">{row.quantity}</span>
+          <Input
+            className="p-2 w-10 h-10"
+            value={row.quantity}
+            min={0}
+            onChange={(e) =>
+              handleQuantityChange(row, parseInt(e.target.value) as any)
+            }
+          />
           <Button
             variant={"link"}
             onClick={() => handleQuantityChange(row, "increase")}
@@ -199,13 +209,15 @@ const ContainerSellItem: FC<{
             ]}
           />
           <RHFSelect name="branch_id" options={Branches} label="اختر فرع" />
-          <Table
-            width="420px"
-            table={{
-              columns: cols,
-              data: selectedProducts,
-            }}
-          />
+          {selectedProducts.length > 0 && (
+            <Table
+              width="420px"
+              table={{
+                columns: cols,
+                data: selectedProducts,
+              }}
+            />
+          )}
           <Button
             className="bg-white border border-primary text-primary font-md text-lg hover:text-white"
             onClick={() => setOpenCouponCode(true)}

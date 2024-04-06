@@ -1,7 +1,7 @@
 const AddPrefix = (url: string) => "/dashboard" + url;
 
 const sellItem = {
-  index: AddPrefix(`/getProduct`),
+  index: AddPrefix(`/getSellItem`),
   buttons: {
     add: AddPrefix(`/createSellItem`),
     update: (id: string | number) => `/updateProduct/${id}`,

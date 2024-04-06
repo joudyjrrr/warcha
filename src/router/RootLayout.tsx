@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 export default function RootLayout() {
   return (
     <>
+    
       <Toaster className="text-primary" />
       <SideBar />
       <Outlet />
