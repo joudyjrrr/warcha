@@ -73,3 +73,8 @@
     @apply bg-primary/85 rounded-full;
   }
 }
+.swiper-button-prev , .swiper-button-next{
+  color: black;
+  border: none;
+  background: transparent !important;
+}

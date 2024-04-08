@@ -14,6 +14,8 @@ import product from "./products";
 import cars from "./cars";
 import customer from "./customer";
 import sellItem from "./sellItem";
+import service from "./service";
+
 
 
 
@@ -22,6 +24,7 @@ import workShops from "./workShops";
 
 const apiRoutes = {
   currency,
+  service,
   sellItem,
   customer,
   cars,

@@ -1,8 +1,7 @@
 const AddPrefix = (url: string) => "/dashboard" + url;
 
-const Cars = {
-  index: AddPrefix(`/getCarCollection`),
-  indexCars: AddPrefix(`/getCar`),
+const Service = {
+  index: AddPrefix(`/getService`),
   buttons: {
     add: AddPrefix(`/createCarCollection`),
     update:(id: string | number) => AddPrefix(`/updateCarCollection/${id}`),
@@ -11,4 +10,4 @@ const Cars = {
   show: (id: string) => AddPrefix(`/${id}`),
 };
 
-export default Cars;
+export default Service;
