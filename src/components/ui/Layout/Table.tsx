@@ -10,10 +10,19 @@ import { Loader2 } from "lucide-react";
 type DataTableProps = {
   table: TableProps;
   width?: string;
-  border?:string;
+  border?: string;
+  customStyles?: any;
+  background?: string;
   [props: string]: unknown;
 };
-const Table = ({ table, width,border, ...props }: DataTableProps) => {
+const Table = ({
+  table,
+  width,
+  border,
+  background,
+  customStyles,
+  ...props
+}: DataTableProps) => {
   return (
     <DataTable
       noHeader
@@ -34,33 +43,37 @@ const Table = ({ table, width,border, ...props }: DataTableProps) => {
           <Loader2 className="mr-2 h-4 w-4 animate-spin" size={"2.5rem"} />
         </div>
       }
-      customStyles={{
-        table: {
-          style: {
-            background: "#fff",
-            width: width,
+      customStyles={
+        customStyles || {
+          table: {
+            style: {
+              background: "#fff",
+              width: width || "100%",
+              overflow:"hidden",
+              overflowX:"hidden"
+            },
           },
-        },
-        headCells: {
-          style: {
-            color: "#969AA0",
-            fontWeight: "400",
-            fontSize: "12px",
-            display: "flex",
-            justifyContent: "center",
+          headCells: {
+            style: {
+              color: "#969AA0",
+              fontWeight: "400",
+              fontSize: "12px",
+              display: "flex",
+              justifyContent: "center",
+              background: background,
+            },
           },
-        },
-        cells: {
-          style: {
-            color: "#1D1F1F",
-            fontWeight: "400",
-            fontSize: "16px",
-            display: "flex",
-            justifyContent: "center",
+          cells: {
+            style: {
+              color: "#1D1F1F",
+              fontWeight: "400",
+              fontSize: "16px",
+              display: "flex",
+              justifyContent: "center",
+            },
           },
-        },
-       
-      }}
+        }
+      }
       progressPending={table.loading}
       noDataComponent={
         <div

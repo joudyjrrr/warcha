@@ -50,9 +50,7 @@ function SelItem() {
       >
         <div className="flex items-start gap-8">
           <div
-            className={`grid grid-cols-3  gap-4 ${
-              selectedProducts.length > 0 && "!grid-cols-3"
-            }`}
+            className={`grid grid-cols-4  gap-4`}
           >
             {data?.data.map((product: ProductData, index: number) => (
               <div
@@ -63,7 +61,7 @@ function SelItem() {
                 key={index}
                 className="p-4 bg-white h-fit rounded-xl cursor-pointer transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
               >
-                <p className="text-md">{product.name}</p>
+                     <p className="text-md">{product.name}</p>
                 <img
                   src={`https://warsha.htc-company.com/public/getImage/${product.main_image.id}/${product.main_image.file_name}`}
                   alt={product.main_image.file_name}
@@ -71,10 +69,10 @@ function SelItem() {
                 />
                 <div className="w-full">
                   <div className="flex w-full justify-between text-xl">
-                    <span className="text-lg">
+                    <span className="text-sm">
                       {product.product_category.name}
                     </span>
-                    <p className="text-lg">{product.price} $</p>
+                    <p className="text-sm">{product.price} $</p>
                   </div>
                 </div>
               </div>

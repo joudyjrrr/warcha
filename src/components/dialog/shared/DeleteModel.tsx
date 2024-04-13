@@ -8,21 +8,21 @@ import { Button } from "../../ui/button";
 import axios from "@/lib/axios";
 const DeleteModal: FC<{
   MassegeSuccess: string;
-  refetch: () => void;
-  apiPath: string;
+  refetch?: () => void;
+  apiPath?: string;
   className?: string;
   key?: string;
 }> = ({ apiPath, MassegeSuccess, refetch }) => {
   const [openModal, setOpenModal] = useState(false);
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await axios.delete(apiPath);
+      const res = await axios.delete(apiPath!);
       return res;
     },
     onSuccess: () => {
       toast(MassegeSuccess);
       setOpenModal(false);
-      refetch();
+      refetch?.();
     },
     onError: (errorMessage: any) => {
       toast.error(errorMessage);

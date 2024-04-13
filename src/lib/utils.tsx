@@ -24,6 +24,21 @@ export const NavigationProject: NavigationProjectProps[] = [
     icon: <SettingsIcons />,
     list: [
       {
+        titleLink: "طلبات الصيانة",
+        path: "/maintenance-requests",
+        query: "",
+      },
+      {
+        titleLink: "قائمة الانتظار",
+        path: "/witing-list",
+        query: "",
+      },
+      {
+        titleLink: "ورشات/مبيعات جديدة",
+        path: "/sell-work-item",
+        query: "",
+      },
+      {
         titleLink: "خدمات/مبيعات جديدة",
         path: "/sell-srv-item",
         query: "",

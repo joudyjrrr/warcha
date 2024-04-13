@@ -186,7 +186,7 @@ const ContainerSellItem: FC<{
   };
   // console.log(selectedCode)
   return (
-    <div className="p-4 bg-white rounded-xl transition-all drop-shadow-lg flex flex-col gap-4 w-[470px]">
+    <div className="p-4  bg-white rounded-xl w-[430px] h-fit transition-all drop-shadow-lg flex flex-col gap-4">
       <FormProvider onSubmit={handleSubmit(submitHandler)} methods={methods}>
         <div className="flex flex-col gap-2">
           <RHFSelect

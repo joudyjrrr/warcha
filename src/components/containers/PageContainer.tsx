@@ -21,6 +21,7 @@ type PageContainerProps = {
   table?: TableProps;
   pageTabs?: { pageTitle: string; pageLink: string }[];
   breadcrumb?: { title: string; href?: string }[];
+  className?:string;
 };
 function PageContainer({
   addFunction,
@@ -29,12 +30,13 @@ function PageContainer({
   table,
   breadcrumb,
   pageTabs,
+  className,
   addLink,
 }: PageContainerProps) {
   // const [filterState, setFilterState] = useState(false);
   const location = useLocation();
   return (
-    <main className="container mx-auto pt-9 bg-white">
+    <main className={`container pt-8  bg-white ${className}`}>
       {breadcrumb && (
         <Breadcrumb className="border-b border-[#DBDAD] pb-4  mb-8">
           <BreadcrumbList>

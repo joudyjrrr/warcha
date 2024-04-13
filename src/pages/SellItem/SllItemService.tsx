@@ -73,10 +73,10 @@ const SllItemService = () => {
   const methods = useForm();
   const { handleSubmit } = methods;
   return (
-    <PageContainer>
-      <div className="flex gap-4 w-full p-4">
+    <PageContainer className="p-2">
+      <div className="flex gap-4 justify-center w-full p-4 overflow-hidden">
         <div className="flex flex-col gap-4">
-          <div className="bg-[#E4F3FF] h-[28rem] shadow p-4 rounded-lg">
+          <div className="bg-[#E4F3FF] h-fit w-[610px]  shadow p-4 rounded-lg">
             <FormProvider onSubmit={handleSubmit(() => {})} methods={methods}>
               <div className="flex flex-col">
                 <div className="flex">
@@ -125,25 +125,12 @@ const SllItemService = () => {
             <div className="">
               <h1 className="text-lg font-sm">المنتجات</h1>
             </div>
-            <Swiper
-              style={
-                {
-                  "--swiper-navigation-color": "#333",
-                  "--swiper-pagination-color": "#333",
-                  position: "relative",
-                } as CSSProperties
-              }
-              className="w-[500px] rounded"
-              // install Swiper modules
-              modules={[Navigation]}
-              spaceBetween={50}
-              slidesPerView={3}
-              navigation
-              pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
+            <div
+              className="rounded grid grid-cols-4 items-start gap-3"
+             
             >
               {Products?.data?.map((product: any, index: number) => (
-                <SwiperSlide
+                <div
                   onClick={() => {
                     setSelectedProduc({ ...product, quantity: 1 });
                     setOpen(true);
@@ -165,32 +152,18 @@ const SllItemService = () => {
                       <p className="text-sm">{product.price} $</p>
                     </div>
                   </div>
-                </SwiperSlide>
+                </div>
               ))}
-              ...
-            </Swiper>
+              
+            </div>
           </div>
           <div className="flex flex-col">
             <h1 className="text-lg font-sm">الخدمات</h1>
-            <Swiper
-              style={
-                {
-                  "--swiper-navigation-color": "#333",
-                  "--swiper-pagination-color": "#333",
-                  position: "relative",
-                } as CSSProperties
-              }
-              className=" w-[500px] rounded"
-              // install Swiper modules
-              modules={[Navigation]}
-              spaceBetween={50}
-              slidesPerView={3}
-              navigation
-              pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
+            <div
+              className="rounded grid grid-cols-3 items-start gap-3"
             >
               {Service?.data?.map((product: any, index: number) => (
-                <SwiperSlide
+                <div
                   onClick={() => handleSeriveSelect(product)}
                   className="p-4 bg-white h-fit rounded-xl cursor-pointer transition-all drop-shadow-lg items-center justify-center flex flex-col gap-4"
                   key={index}
@@ -206,10 +179,10 @@ const SllItemService = () => {
                       <p className="text-sm">{product.price} $</p>
                     </div>
                   </div>
-                </SwiperSlide>
+                </div>
               ))}
-              ...
-            </Swiper>
+              
+            </div>
           </div>
         </div>
         <ContainerSellItemService
